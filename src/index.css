@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.inter{
+font-family: "Inter", sans-serif;
+}
+.plus{
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+ 
+}
+.container{
+  max-width: 1150px;
+  min-width: 300px;
+  padding: 0px;
+  margin: 0px auto;
+  padding: 0px 8px;
+}
+.link-active {
+  font-weight: bold;
+  color: grey;
+  border-radius: 6px;
+}

@@ -1,0 +1,182 @@
+[
+    {
+      "sessionTitle": "Introduction to React",
+      "tutorName": "John Doe",
+      "tutorEmail": "john.doe@example.com",
+      "averageRating": 4.5,
+      "sessionDescription": "Learn the basics of React, a popular JavaScript library for building user interfaces.",
+      "registrationStartDate": "2024-06-01",
+      "registrationEndDate": "2024-06-10",
+      "classStartDate": "2024-06-15",
+      "classEndDate": "2024-06-15",
+      "sessionDuration": "2 hours",
+      "registrationFee": "Free",
+      "reviews": [
+        {
+          "studentName": "Alice",
+          "review": "Great session, I learned a lot!"
+        },
+        {
+          "studentName": "Bob",
+          "review": "John is a fantastic tutor."
+        }
+      ],
+      "isRegistrationOpen": true,
+      "otherInfo": "This session is suitable for beginners."
+    },
+
+    {
+        "sessionTitle": "Advanced React Patterns",
+        "tutorName": "Jane Smith",
+        "tutorEmail": "jane.doe@example.com",
+        "averageRating": 4.7,
+        "sessionDescription": "Explore advanced patterns and state management solutions in React.",
+        "registrationStartDate": "2024-06-05",
+        "registrationEndDate": "2024-06-15",
+        "classStartDate": "2024-06-20",
+        "classEndDate": "2024-06-20",
+        "sessionDuration": "2 hours",
+        "registrationFee": "$50",
+        "reviews": [
+          {
+            "studentName": "Charlie",
+            "review": "Jane is an excellent instructor, and this session was very informative."
+          },
+          {
+            "studentName": "Debbie",
+            "review": "I really enjoyed this session and learned a lot about advanced React patterns."
+          }
+        ],
+        "isRegistrationOpen": true,
+        "otherInfo": "This session is suitable for those who have a basic understanding of React."
+      },
+    
+        {
+          "sessionTitle": "React State Management",
+          "tutorName": "Michael Brown",
+          "tutorEmail": "brown.doe@example.com",
+          "averageRating": 4.6,
+          "sessionDescription": "Dive into the world of state management in React with practical examples and best practices.",
+          "registrationStartDate": "2024-06-08",
+          "registrationEndDate": "2024-06-18",
+          "classStartData": "2024-06-23",
+          "classEndDate": "2024-06-23",
+          "sessionDuration": "2 hours",
+          "registrationFee": "$30",
+          "reviews": [
+            {
+              "studentName": "Eva",
+              "review": "Michael's insights into state management were eye-opening!"
+            },
+            {
+              "studentName": "David",
+              "review": "Clear explanations and engaging content."
+            }
+          ],
+          "isRegistrationOpen": true,
+          "otherInfo": "Prior experience with React hooks is recommended."
+        },
+        {
+          "sessionTitle": "Building Reusable React Components",
+          "tutorName": "Samantha Lee",
+          "tutorEmail": "lee.doe@example.com",
+          "averageRating": 4.8,
+          "sessionDescription": "Learn how to create reusable and scalable components in React for faster development.",
+          "registrationStartDate": "2024-06-10",
+          "registrationEndDate": "2024-06-20",
+          "classStartData": "2024-06-25",
+          "classEndDate": "2024-06-25",
+          "sessionDuration": "2 hours",
+          "registrationFee": "$40",
+          "reviews": [
+            {
+              "studentName": "Felix",
+              "review": "Samantha's approach to component design is incredibly practical."
+            },
+            {
+              "studentName": "Grace",
+              "review": "I've learned so much about component architecture. Highly recommend!"
+            }
+          ],
+          "isRegistrationOpen": true,
+          "otherInfo": "Suitable for intermediate-level React developers."
+        },
+        {
+          "sessionTitle": "React and TypeScript",
+          "tutorName": "Liam Wong",
+          "tutorEmail": "liam.doe@example.com",
+          "averageRating": 4.9,
+          "sessionDescription": "Enhance your React projects with TypeScript for better maintainability and developer experience.",
+          "registrationStartDate": "2024-06-12",
+          "registrationEndDate": "2024-06-22",
+          "classStartDate": "2024-06-27",
+          "classEndDate": "2024-06-27",
+          "sessionDuration": "2 hours",
+          "registrationFee": "$45",
+          "reviews": [
+            {
+              "studentName": "Hannah",
+              "review": "Liam's expertise in TypeScript made this session invaluable."
+            },
+            {
+              "studentName": "Ian",
+              "review": "The best session for understanding TypeScript with React."
+            }
+          ],
+          "isRegistrationOpen": true,
+          "otherInfo": "Basic knowledge of TypeScript is beneficial."
+        },
+        {
+          "sessionTitle": "React Router Mastery",
+          "tutorName": "Olivia Park",
+          "tutorEmail": "park.doe@example.com",
+          "averageRating": 4.4,
+          "sessionDescription": "Master navigation in your React apps with React Router in this comprehensive workshop.",
+          "registrationStartDate": "2024-06-15",
+          "registrationEndDate": "2024-06-25",
+          "classStartDate": "2024-06-30",
+          "classEndDate": "2024-06-30",
+          "sessionDuration": "2 hours",
+          "registrationFee": "Free",
+          "reviews": [
+            {
+              "studentName": "Jack",
+              "review": "Olivia's session on React Router was a game-changer for me."
+            },
+            {
+              "studentName": "Lily",
+              "review": "Very informative and well-structured class."
+            }
+          ],
+          "isRegistrationOpen": true,
+          "otherInfo": "Great for developers looking to improve their single-page applications."
+        },
+        {
+          "sessionTitle": "React Hooks in Depth",
+          "tutorName": "Ethan Clark",
+          "tutorEmail": "ethan.doe@example.com",
+          "averageRating": 4.3,
+          "sessionDescription": "Unlock the full potential of React Hooks to write cleaner and more efficient components.",
+          "registrationStartDate": "2024-06-18",
+          "registrationEndDate": "2024-06-28",
+          "classStartDate": "2024-07-03",
+          "classEndDate": "2024-07-03",
+          "sessionDuration": "2 hours",
+          "registrationFee": "$35",
+          "reviews": [
+            {
+              "studentName": "Mia",
+              "review": "Ethan's deep dive into hooks has significantly improved my coding skills."
+            },
+            {
+              "studentName": "Noah",
+              "review": "The practical exercises were perfect for understanding hooks."
+            }
+          ],
+          "isRegistrationOpen": true,
+          "otherInfo": "Attendees should be familiar with basic React concepts."
+        }
+      ]
+      
+  
+  
