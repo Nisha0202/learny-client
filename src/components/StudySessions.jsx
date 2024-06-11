@@ -31,63 +31,6 @@ const StudySessionCard = ({ session }) => {
 };
 
 
-// const fetchSessions = async () => {
-//   try {
-//     const res = await fetch('http://localhost:5000/api/session');
-//     if (!res.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-//     const data = await res.json();
-//     console.log(data);
-
-//     return data; // return data directly
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//     throw error;
-//   }
-// };
-
-
-
-// const StudySessions = () => {
-//   const [displayCount, setDisplayCount] = useState(3);
-//   const { data: sessionsData, status } = useQuery({
-//     queryKey: 'sessions',
-//     queryFn: fetchSessions,
-//     retry: 3, // retry up to 3 times
-//   });
-  
-
-
-//   if (status === 'loading') {
-//     return <div className='container grid place-content-center'> Loading...</div>;
-//   }
-
-//   if (status === 'error') {
-//     return <div className='container grid place-content-center'>Error fetching data</div>;
-//   }
-
-//   if (!Array.isArray(sessionsData)) {
-//     console.error('sessionsData is not an array');
-//     return <div>Error: Data is not in expected format</div>;
-//   }
-
-//   return (
-//     <div className='container flex flex-wrap justify-evenly gap-4'>
-//       {sessionsData.slice(0, displayCount).map((session, index) => (
-//         <StudySessionCard key={index} session={session} />
-//       ))}
-//       {sessionsData.length > displayCount && 
-//         <button 
-//           className="mt-4 py-2 px-4 rounded bg-blue-500 text-white" 
-//           onClick={() => setDisplayCount(sessionsData.length)}
-//         >
-//           See All Sessions
-//         </button>
-//       }
-//     </div>
-//   );
-// };
 const fetchSessions = async () => {
   try {
     const res = await fetch('http://localhost:5000/api/session');
@@ -113,12 +56,7 @@ const StudySessions = () => {
     queryFn: fetchSessions,
     retry: 3, // retry up to 3 times
   });
-  // const { data: sessionsData, status, error } = useQuery({
-  //   queryKey: 'essions',
-  //   queryFn: fetchSessions,
-  //   retry: 3, // retry up to 3 times
-  //   staleTime: 1000 * 60 * 1, // cache for 5 minutes
-  // });
+
 
   if (status === 'loading') {
     return <div className='container grid place-content-center'> Loading...</div>;

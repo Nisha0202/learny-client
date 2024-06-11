@@ -48,7 +48,7 @@ const Navbar = () => {
         {login ? (
           <div className="flex justify-center items-center text-sm gap-2 lg:gap-4">
             <img src={usern.photoURL || 'https://i.pinimg.com/564x/f5/b5/51/f5b5519260e87d46e516658c6fb2282d.jpg'} alt="User"
-              className=" w-8 h-8 rounded-full border-2 mt-1" />
+              className=" w-8 h-8 rounded-full border-2 mt-1" title={usern.displayName}/>
             <Link to={dashboardRoute} className=" btn-sm font-bold py-2 px-2 rounded hover:text-blue-700 ">
               Dashboard
             </Link>

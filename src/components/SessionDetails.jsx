@@ -83,7 +83,7 @@ const SessionDetails = () => {
   ))}
 </div>
 
-          <div className='flex justify-end mb-4'>
+          <div className='flex justify-end mb-2'>
       <button 
         disabled={!session.isRegistrationOpen || usern.role === 'admin' || usern.role === 'tutor'}
         onClick={handleBookNow}

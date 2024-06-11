@@ -23,6 +23,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import Payment from './pages/Payment';
+import BookedSession from './components/BookedSession';
 
 const queryClient = new QueryClient()
 
@@ -69,7 +70,12 @@ const router = createBrowserRouter([
       {
         path: "/payment/:id",
         element: <Payment/>,
-      }
+      },
+      {
+        path: "/booked-sessions",
+        element: <BookedSession/>,
+      },
+    
     ],
   },
 ]);
