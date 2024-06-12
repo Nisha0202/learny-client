@@ -10,7 +10,7 @@ export default function Home() {
       <Banner/>
       <div className='my-16'></div>
       <StudySessions/>
-      {/* <DisplayTutor/> */}
+      <DisplayTutor/>
     </div>
   )
 }
