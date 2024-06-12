@@ -6,6 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 
 const StudySessionCard = ({ session }) => {
   const { usern } = useContext(AuthContext);
+  const currentDate = new Date();
+  const registrationEndDate = new Date(session.registrationEndDate);
+  const isRegistrationOpen = currentDate <= registrationEndDate;
  const navigate = useNavigate();
   const handleReadMore = () => {
     if (!usern) {
@@ -17,12 +20,12 @@ const StudySessionCard = ({ session }) => {
   };
   return (
     <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
-      <h2 className="text-xl font-bold mb-2">{session.sessionTitle}</h2>
+      <h2 className="text-xl font-bold mb-2 h-14 py-1">{session.sessionTitle}</h2>
       <p className='mb-3 text-blue-500'>{session.registrationFee}</p>
-      <p className="text-gray-600 h-24">{session.sessionDescription}</p>
+      <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription}</p>
       <div className='w-full flex justify-between mt-auto'>
-        <button className={`mt-2 font-bold py-1  rounded ${session.isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
-          {session.isRegistrationOpen ? 'Ongoing' : 'Closed'}
+        <button className={`mt-2 font-bold py-1  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
+          {isRegistrationOpen ? 'Ongoing' : 'Closed'}
         </button>
         <button onClick={handleReadMore} className="mt-2 py-1  rounded hover:text-blue-700 font-bold">Read More</button>
       </div>

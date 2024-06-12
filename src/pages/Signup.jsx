@@ -92,24 +92,6 @@ export default function SignUp() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     };
 
     if(usern) return
@@ -146,7 +128,7 @@ export default function SignUp() {
           <FaRegUser />
           <select {...register("role", { required: true })} className="grow">
             <option value="student">Student</option>
-            <option value="tutor">Tutor</option>
+            <option value="teacher">Tutor</option>
             <option value="admin">Admin</option>
           </select>
           {errors.role && <span className='text-xs text-red-500'>required field</span>}
