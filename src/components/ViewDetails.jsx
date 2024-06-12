@@ -7,11 +7,18 @@ import { FaUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+// const fetchSession = async ({ queryKey }) => {
+//     const [, id] = queryKey;
+//     const res = await axios.get(`http://localhost:5000/api/session/${id}`);
+//     return res.data;
+// };
 const fetchSession = async ({ queryKey }) => {
     const [, id] = queryKey;
-    const res = await axios.get(`http://localhost:5000/api/session/${id}`);
-    return res.data;
-};
+    const sessionRes = await axios.get(`http://localhost:5000/api/session/${id}`);
+    const reviewsRes = await axios.get(`http://localhost:5000/api/review/${id}`);
+    return { ...sessionRes.data, reviews: reviewsRes.data };
+  };
+  
 const bookSession = async ({ sessionId, userEmail, tutorEmail }) => {
     const res = await axios.post(`http://localhost:5000/api/bookedSession`, {
         sessionId,

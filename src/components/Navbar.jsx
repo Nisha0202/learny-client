@@ -15,17 +15,7 @@ const Navbar = () => {
     setLogin(!!usern);
   }, [usern]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   const role = localStorage.getItem('role');
-  //   if (token) {
-  //     const decodedToken = jwtDecode(token);
-  //     console.log('User role:', decodedToken.role);
-  //     setRole(decodedToken.role);
-  //   }else if(role){
-  //     setRole(role);
-  //   }
-  // }, [usern]);
+  
   useEffect(() => {
     const role = localStorage.getItem('role');
     if (role) {
