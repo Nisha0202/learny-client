@@ -30,7 +30,7 @@ import ManageNotes from './pages/ManageNotes';
 import CreateSessions from './pages/CreateSessions';
 import RequestSession from './pages/RequestSession';
 import UploadMaterials from './pages/UplodMaterials';
-
+import ViewMaterials from './pages/ViewMaterials';
 const queryClient = new QueryClient()
 
 
@@ -121,6 +121,10 @@ const router = createBrowserRouter([
         path: "/upload-materials",
         element: <UploadMaterials/>
       },
+      {
+        path: "/view-materials",
+        element: <ViewMaterials/>
+      }
 
     
     ],

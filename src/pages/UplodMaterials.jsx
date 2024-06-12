@@ -31,8 +31,6 @@ export default function UploadMaterials() {
         }
     }, [selectedSession]);
 
-  
-
 const uploadImage = async (imageFile) => {
     const formData = new FormData();
     formData.append('image', imageFile);
@@ -46,12 +44,10 @@ const uploadImage = async (imageFile) => {
     return res.data.data.url; // The URL of the uploaded image
 };
 
-const [isLoading, setIsLoading] = useState(false);  
+
 
     const handleUploadSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
-
         // Get the form data
         const title = e.target.title.value;
         const imageFile = e.target.image.files[0];
@@ -81,10 +77,12 @@ const [isLoading, setIsLoading] = useState(false);
         });
 
         if (!res.ok) {
+            document.getElementById('my_modal_1').close();
             Swal.fire('Error!', ' Please try again.', 'error');
          throw new Error('Failed to upload material');
     }
-          setIsLoading(false);  
+          
+          document.getElementById('my_modal_1').close();  
         Swal.fire('Success!', 'Material Uploaded!', 'success');
 
 
@@ -167,14 +165,7 @@ const [isLoading, setIsLoading] = useState(false);
                 </dialog>
             )}
 
-{isLoading && (
-    <dialog id="my_modal_1" className="modal z-50">
-    <div className="modal-box">
-      <h3 className="font-bold text-lg">Loading...!</h3>
-    
-    </div>
-  </dialog>
-)}
+
 
         </div>
 
