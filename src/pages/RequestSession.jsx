@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; 
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
+import Swal from 'sweetalert2';
 
 const fetchSessions = async ({ queryKey }) => {
   const [, { tutorEmail }] = queryKey;
@@ -21,7 +22,7 @@ const sendRequestAgain = async (sessionId) => {
 
 export default function RequestSession() {
   const { usern } = useContext(AuthContext);
-  const { data: sessionsData, status } = useQuery({
+  const { data: sessionsData, status, refetch } = useQuery({ // Add refetch to the returned values
     queryKey: ['sessions', { tutorEmail: usern.email }],
     queryFn: fetchSessions,
     retry: 3, // retry up to 3 times
@@ -29,8 +30,9 @@ export default function RequestSession() {
 
   const mutation = useMutation({
     mutationFn: sendRequestAgain,
-    onSuccess: () => {
+    onSuccess: (data) => { // Add data as a parameter
       Swal.fire('Success!', data.message, 'success');
+      refetch(); // Call refetch after the mutation
     },
     onError: (error) => {
       Swal.fire('Error!', 'Failed to book session. Please try again.', 'error');
@@ -58,3 +60,4 @@ export default function RequestSession() {
     </div>
   );
 }
+

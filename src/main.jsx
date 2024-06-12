@@ -29,6 +29,7 @@ import CreateNotes from './pages/CreateNotes';
 import ManageNotes from './pages/ManageNotes';
 import CreateSessions from './pages/CreateSessions';
 import RequestSession from './pages/RequestSession';
+import UploadMaterials from './pages/UplodMaterials';
 
 const queryClient = new QueryClient()
 
@@ -116,7 +117,10 @@ const router = createBrowserRouter([
         path: "/study-session",
         element: <RequestSession/>
       },
-
+      {
+        path: "/upload-materials",
+        element: <UploadMaterials/>
+      },
 
     
     ],
