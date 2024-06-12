@@ -109,7 +109,7 @@ const ViewDetails = () => {
                     {session.reviews.map((review, index) => (
                         <div key={index} className="flex items-center gap-2">
                             <FaUserCircle className="text-blue-500" />
-                            <p className="font-bold">{review.studentName}:</p>
+                            <p className="font-bold">{review.userName}:</p>
                             <p>{review.review}</p>
                         </div>
                     ))}

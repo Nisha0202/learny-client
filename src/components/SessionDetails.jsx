@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { FaUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
-// const fetchSession = async ({ queryKey }) => {
-//   const [, id] = queryKey;
-//   const res = await axios.get(`http://localhost:5000/api/session/${id}`);
-//   return res.data;
-// };
 
 const fetchSession = async ({ queryKey }) => {
   const [, id] = queryKey;
@@ -19,10 +14,6 @@ const fetchSession = async ({ queryKey }) => {
   const reviewsRes = await axios.get(`http://localhost:5000/api/review/${id}`);
   return { ...sessionRes.data, reviews: reviewsRes.data };
 };
-
-
-
-
 
 const bookSession = async ({ sessionId, userEmail, tutorEmail }) => {
   const res = await axios.post(`http://localhost:5000/api/bookedSession`, {
@@ -49,9 +40,11 @@ const SessionDetails = () => {
       }
     }
   }, [usern]);
-  const [redirectToPayment, setRedirectToPayment] = useState(false);
-
- 
+  // const [redirectToPayment, setRedirectToPayment] = useState(false);
+  const navigate = useNavigate();
+ const setRedirectToPayment=()=>{
+  navigate(`/payment/${session._id}`);
+ }
 
 
   const { data: session, isLoading, isError } = useQuery({
@@ -69,8 +62,8 @@ const SessionDetails = () => {
   });
 
   const handleBookNow = () => {
-    if (session.registrationFee !== "Free" || session.registrationFee !== 0) {
-      setRedirectToPayment(true);
+    if (session.registrationFee !== "Free" && session.registrationFee !== 0)  {
+      setRedirectToPayment();
     } else {
       mutation.mutate({ sessionId: id, userEmail: usern.email, tutorEmail: session.tutorEmail });
     }
@@ -130,23 +123,28 @@ const SessionDetails = () => {
 
         <div className='flex justify-end mb-2'>
       
-if (role !== 'student') {
-  <button
-  disabled
-  className="mt-2 w-64 font-bold py-2 px-2 text-black rounded">
- Book Now
-</button>
-}else if(isRegistrationOpen){
-   <button
-   className="mt-2 w-64 font-bold py-2 px-2 bg-blue-500 text-white rounded">
-  Book Now
- </button>
-}else{
-  <button
-   className="mt-2 w-64 font-bold py-2 px-2 bg-red-500 text-white rounded">
-   Registration Closed
- </button>
-}
+        <div className='flex justify-end mb-2'>
+  {role !== 'student' ? (
+    <button
+      disabled
+      className="mt-2 w-64 font-bold py-2 px-2 bg-gray-400 text-black rounded">
+      Book Now
+    </button>
+  ) : isRegistrationOpen ? (
+    <button
+      onClick={handleBookNow}
+      className="mt-2 w-64 font-bold py-2 px-2 bg-blue-500 text-white rounded">
+      Book Now
+    </button>
+  ) : (
+    <button
+      disabled
+      className="mt-2 w-64 font-bold py-2 px-2 bg-red-500 text-white rounded">
+      Registration Closed
+    </button>
+  )}
+</div>
+
 
 
 
