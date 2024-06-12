@@ -19,7 +19,7 @@ const StdNav = () => {
           <Link to="/booked-sessions" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
             View Booked Sessions
           </Link>
-          <Link to="/create-note" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
+          <Link to="/create-notes" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
             Create Note
           </Link>
           <Link to="/manage-notes" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
