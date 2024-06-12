@@ -33,19 +33,6 @@ function ManageNotes() {
     });
 
 
-// const updateNote = async (id, title, description) => {
-//     try {
-//         const response = await axios.put(`http://localhost:5000/api/notes/${id}`, { title, description });
-
-//         // Update the note in the state
-//         queryClient.invalidateQueries(['notes', usern.email]); 
-//         Swal.fire('Success!', 'Your note has been updated.', 'success');
-//     } catch (error) {
-//         console.error('Error:', error);
-//         Swal.fire('Error!', 'There was an error updating your note. Please try again.', 'error');
-//     }
-// };
-
 
 const updateNoteMutation = useMutation({
     mutationFn: async ({ id, title, description }) => {
@@ -69,21 +56,46 @@ const handleUpdateSubmit = (event) => {
   setCurrentNote(null);
 };
 
-    const deleteNote = (id) => {
-        fetch(`http://localhost:5000/api/notes/${id}`, {
-            method: 'DELETE',
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Remove the note from the state
-            queryClient.invalidateQueries(['notes', usern.email]); // Invalidate the query to refetch the notes
-            Swal.fire('Success!', 'Your note has been deleted.', 'success');
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            Swal.fire('Error!', 'There was an error deleting your note. Please try again.', 'error');
+    // const deleteNote = (id) => {
+    //     fetch(`http://localhost:5000/api/notes/${id}`, {
+    //         method: 'DELETE',
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Remove the note from the state
+    //         queryClient.invalidateQueries(['notes', usern.email]); // Invalidate the query to refetch the notes
+    //         Swal.fire('Success!', 'Your note has been deleted.', 'success');
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error:', error);
+    //         Swal.fire('Error!', 'There was an error deleting your note. Please try again.', 'error');
+    //     });
+    // };
+    const deleteNote = async (id) => {
+        const result = await Swal.fire({
+          title: 'Are you sure?',
+          text: 'You will not be able to recover this note!',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, keep it'
         });
-    };
+      
+        if (result.isConfirmed) {
+          const response = await fetch(`http://localhost:5000/api/notes/${id}`, {
+            method: 'DELETE',
+          });
+      
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+      
+          // Remove the note from the state
+          queryClient.invalidateQueries(['notes', usern.email]); // Invalidate the query to refetch the notes
+          Swal.fire('Deleted!', 'Your note has been deleted.', 'success');
+        }
+      };
+      
 
     const openUpdateDialog = (note) => {
         setCurrentNote(note);
@@ -92,7 +104,7 @@ const handleUpdateSubmit = (event) => {
     };
 
     if (isLoading) return <div className='container grid place-item-center'>Loading...</div> ;
-    if (error) return <div className='container grid place-item-center'>An error has occurred: {error.message}</div> ; // Corrected the error message
+    if (error) return <div className='container grid place-item-center'>An error has occurred:</div> ; // Corrected the error message
 
     return (
         <div className='container min-h-[75vh]'>

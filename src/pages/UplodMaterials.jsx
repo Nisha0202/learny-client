@@ -54,9 +54,11 @@ const uploadImage = async (imageFile) => {
         const link = e.target.link.value;
 
         // Upload the image to ImgBB and get the image URL
-        const imageURL = await uploadImage(imageFile);
+        let imageURL = "";
 
-
+        if (imageFile) {
+            imageURL = await uploadImage(imageFile);
+          }
 
 
 
