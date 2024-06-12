@@ -81,28 +81,28 @@ const StudySessions = () => {
     console.error('sessionsData is not an array or is null/undefined');
     return <div className='container grid place-item-center'>Loading</div>;
   }
+  const approvedSessions = sessionsArray.filter(session => session.status === 'approved');
 
   return (
     <div className='container grid place-item-center gap-8'>
-
-        <div className='flex flex-wrap justify-evenly gap-4'>
-      {sessionsData.slice(0, displayCount).map((session, index) => (
-        <StudySessionCard key={index} session={session} />
-      ))}
-    
-    </div>
-  {sessionsData.length > displayCount && 
+      <div className='flex flex-wrap justify-evenly gap-4'>
+        {approvedSessions.slice(0, displayCount).map((session, index) => (
+          <StudySessionCard key={index} session={session} />
+        ))}
+      </div>
+      {approvedSessions.length > displayCount && 
         <button 
           className="mx-auto py-2 px-4 rounded bg-blue-500 text-white" 
-          onClick={() => setDisplayCount(sessionsData.length)}
+          onClick={() => setDisplayCount(approvedSessions.length)}
         >
           See All Sessions
         </button>
       }
-
     </div>
-  
   );
+
+  
+  
 };
 
 

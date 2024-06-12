@@ -5,7 +5,7 @@ import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { FaUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 
 const fetchSession = async ({ queryKey }) => {
@@ -42,9 +42,9 @@ const SessionDetails = () => {
   }, [usern]);
   // const [redirectToPayment, setRedirectToPayment] = useState(false);
   const navigate = useNavigate();
- const setRedirectToPayment=()=>{
-  navigate(`/payment/${session._id}`);
- }
+  const setRedirectToPayment = () => {
+    navigate(`/payment/${session._id}`);
+  }
 
 
   const { data: session, isLoading, isError } = useQuery({
@@ -62,7 +62,7 @@ const SessionDetails = () => {
   });
 
   const handleBookNow = () => {
-    if (session.registrationFee !== "Free" && session.registrationFee !== 0)  {
+    if (session.registrationFee !== "Free" && session.registrationFee !== 0) {
       setRedirectToPayment();
     } else {
       mutation.mutate({ sessionId: id, userEmail: usern.email, tutorEmail: session.tutorEmail });
@@ -72,11 +72,11 @@ const SessionDetails = () => {
   if (isLoading) return <div className='container grid place-content-center'>Loading...</div>;
   if (isError || !session) return <div className='container grid place-content-center'>Error fetching data</div>;
 
-    // Move the averageRating calculation here, after session data is fetched
-    let averageRating = 0;
-    if (session && session.reviews) {
-      averageRating = session.reviews.reduce((total, review) => total + review.rating, 0) / session.reviews.length;
-    }
+  // Move the averageRating calculation here, after session data is fetched
+  let averageRating = 0;
+  if (session && session.reviews) {
+    averageRating = session.reviews.reduce((total, review) => total + review.rating, 0) / session.reviews.length;
+  }
 
   const currentDate = new Date();
   const registrationEndDate = new Date(session.registrationEndDate);
@@ -90,13 +90,13 @@ const SessionDetails = () => {
         <div className='flex flex-col md:flex-row my-4 justify-between items-center'>
           <p>Tutor: <span className='font-bold text-lg text-blue-700'>{session.tutorName}</span></p>
           {/* <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>{session.averageRating}</span> </p> */}
-          
+
           <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>
             {averageRating ? averageRating : session.averageRating}
-            </span> </p>
-          
-          </div>
-        
+          </span> </p>
+
+        </div>
+
         <div className='flex flex-col gap-4 text-sm'>
           <p>Registration Start Date: {" "}{session.registrationStartDate}</p>
           <p className='border-2 max-w-72 border-blue-400 py-2 px-1'>Registration End Date: {" "} {session.registrationEndDate}</p>
@@ -105,45 +105,46 @@ const SessionDetails = () => {
           <p>Session Duration:{" "} {session.sessionDuration}</p>
           <p>Registration:
             <span className='text-indigo-500 font-bold'> {session.registrationFee}</span></p>
+            <p>More: {session.otherInfo}</p>
         </div>
         <div className='flex flex-col gap-3 mt-4'>
-        <h3 className='text-lg font-bold'>Reviews:</h3>
-{session.reviews && session.reviews.length > 0 ? (
-  session.reviews.map((review, index) => (
-    <div key={index} className="flex items-center gap-2">
-      <FaUserCircle className="text-blue-500" />
-      <p className="font-bold">{review.userName}:</p>
-      <p>{review.review}</p>
-    </div>
-  ))
-) : (
-  <p>No Review Yet</p>
-)}
-</div>
+          <h3 className='text-lg font-bold'>Reviews:</h3>
+          {session.reviews && session.reviews.length > 0 ? (
+            session.reviews.map((review, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <FaUserCircle className="text-blue-500" />
+                <p className="font-bold">{review.userName}:</p>
+                <p>{review.review}</p>
+              </div>
+            ))
+          ) : (
+            <p>No Review Yet</p>
+          )}
+        </div>
 
         <div className='flex justify-end mb-2'>
-      
-        <div className='flex justify-end mb-2'>
-  {role !== 'student' ? (
-    <button
-      disabled
-      className="mt-2 w-64 font-bold py-2 px-2 bg-gray-400 text-black rounded">
-      Book Now
-    </button>
-  ) : isRegistrationOpen ? (
-    <button
-      onClick={handleBookNow}
-      className="mt-2 w-64 font-bold py-2 px-2 bg-blue-500 text-white rounded">
-      Book Now
-    </button>
-  ) : (
-    <button
-      disabled
-      className="mt-2 w-64 font-bold py-2 px-2 bg-red-500 text-white rounded">
-      Registration Closed
-    </button>
-  )}
-</div>
+
+          <div className='flex justify-end mb-2'>
+            {role !== 'student' ? (
+              <button
+                disabled
+                className="mt-2 w-64 font-bold py-2 px-2 bg-gray-400 text-black rounded">
+                Book Now
+              </button>
+            ) : isRegistrationOpen ? (
+              <button
+                onClick={handleBookNow}
+                className="mt-2 w-64 font-bold py-2 px-2 bg-blue-500 text-white rounded">
+                Book Now
+              </button>
+            ) : (
+              <button
+                disabled
+                className="mt-2 w-64 font-bold py-2 px-2 bg-red-500 text-white rounded">
+                Registration Closed
+              </button>
+            )}
+          </div>
 
 
 

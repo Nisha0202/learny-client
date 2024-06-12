@@ -12,7 +12,7 @@ const CreateSessions = () => {
   const [classStartDate, setClassStartDate] = useState('');
   const [classEndDate, setClassEndDate] = useState('');
   const [sessionDuration, setSessionDuration] = useState('');
-
+  const [otherInfo, setOtherInfo] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -28,7 +28,8 @@ const CreateSessions = () => {
             classEndDate,
             sessionDuration,
             registrationFee: 0,
-            status: 'pending'
+            status: 'pending',
+            otherInfo
         });
         // Clear the form
         setSessionTitle('');
@@ -38,6 +39,7 @@ const CreateSessions = () => {
         setClassStartDate('');
         setClassEndDate('');
         setSessionDuration('');
+        setOtherInfo('');
         // Show a success alert
         Swal.fire('Success!', 'Your session has been created.', 'success');
     } catch (error) {
@@ -98,6 +100,10 @@ const CreateSessions = () => {
 </label>
 <input type="text" value={sessionDuration} onChange={(e) => setSessionDuration(e.target.value)} className="input input-bordered w-full" placeholder='example: 1hr' required />
 
+<label className="label">
+            <span className="label-text">Other Info</span>
+          </label>
+          <textarea value={otherInfo} onChange={(e) => setOtherInfo(e.target.value)} className="textarea textarea-bordered h-24"></textarea>
 
   <button type="submit" className="btn bg-blue-500 text-white mt-4">Create Session</button>
 </form>
