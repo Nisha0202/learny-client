@@ -80,19 +80,25 @@ const StudySessions = () => {
   }
 
   return (
-    <div className='container flex flex-wrap justify-evenly gap-4'>
+    <div className='container grid place-item-center gap-8'>
+
+        <div className='flex flex-wrap justify-evenly gap-4'>
       {sessionsData.slice(0, displayCount).map((session, index) => (
         <StudySessionCard key={index} session={session} />
       ))}
-      {sessionsData.length > displayCount && 
+    
+    </div>
+  {sessionsData.length > displayCount && 
         <button 
-          className="mt-4 py-2 px-4 rounded bg-blue-500 text-white" 
+          className="mx-auto py-2 px-4 rounded bg-blue-500 text-white" 
           onClick={() => setDisplayCount(sessionsData.length)}
         >
           See All Sessions
         </button>
       }
+
     </div>
+  
   );
 };
 

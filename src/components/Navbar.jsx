@@ -15,16 +15,34 @@ const Navbar = () => {
     setLogin(!!usern);
   }, [usern]);
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   const role = localStorage.getItem('role');
+  //   if (token) {
+  //     const decodedToken = jwtDecode(token);
+  //     console.log('User role:', decodedToken.role);
+  //     setRole(decodedToken.role);
+  //   }else if(role){
+  //     setRole(role);
+  //   }
+  // }, [usern]);
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      console.log('User role:', decodedToken.role);
-      setRole(decodedToken.role);
+    const role = localStorage.getItem('role');
+    if (role) {
+      setRole(role);
+    } else {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        console.log('User role:', decodedToken.role);
+        setRole(decodedToken.role);
+      }
     }
-  }, []);
+  }, [usern]);
+  
 
   const dashboardRoute = useMemo(() => {
+   
     switch (role) {
       case 'student':
         return '/student';

@@ -61,11 +61,14 @@ export default function FirbaseProvider(props) {
       .then(async (result) => {
         // setUsern(result.user); 
         result.user.role = 'student';
+        localStorage.setItem('role', result.user.role);
+
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const accessToken = credential.accessToken;
         setUsern(result.user);
         const token = await result.user.getIdToken(); // Get the JWT
         localStorage.setItem('token', token); // Store the JWT in local storage
+
         navigate("/");
       })
       .catch((error) => {
@@ -80,6 +83,8 @@ export default function FirbaseProvider(props) {
     signInWithPopup(auth, githubprovider)
       .then(async (result) => {
        result.user.role = 'student';
+       localStorage.setItem('role', result.user.role);
+
       const credential = GithubAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
       setUsern(result.user);
@@ -101,6 +106,7 @@ export default function FirbaseProvider(props) {
         // Sign-out successful.
         console.log('Sign-out successful');
         localStorage.removeItem('token');
+        localStorage.removeItem('role');
         setUsern(false);
 
       })

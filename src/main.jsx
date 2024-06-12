@@ -24,6 +24,7 @@ import {
 } from '@tanstack/react-query'
 import Payment from './pages/Payment';
 import BookedSession from './components/BookedSession';
+import ViewDetails from './components/ViewDetails';
 
 const queryClient = new QueryClient()
 
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
       {
         path: "/session/:id",
         element: <SessionDetails/>,
+    
+      },
+      {
+        path: "/viewdetails/:id",
+        element: <ViewDetails/>,
     
       },
       {

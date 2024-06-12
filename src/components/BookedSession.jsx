@@ -27,7 +27,7 @@ const BookedSession = () => {
     if (!usern) {
       navigate('/login');
     } else {
-      navigate(`/session/${sessionId}`);
+      navigate(`/viewdetails/${sessionId}`);
     }
   };
 
@@ -50,11 +50,3 @@ const BookedSession = () => {
 };
 
 export default BookedSession;
-
-  // // Fetch the session details from the server
-  // axios.get(`http://localhost:5000/api/session/${sessionId}`)
-  //   .then(response => {
-  //     // Display the session details
-  //     console.log(response.data);
-  //   })
-  //   .catch(error => console.error('Error fetching session details:', error));

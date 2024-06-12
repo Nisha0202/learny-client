@@ -1,31 +1,27 @@
 import React from 'react';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, useNavigate, Navigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
-const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
-  const token = localStorage.getItem('token');
-  const isAuthenticated = !!token;
-  let role = '';
-  const navigate = useNavigate();
 
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    role = decodedToken.role;
-  }
+const PrivateRoute = ({ component: Component, role: Role, ...rest }) => {
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role') || (token && jwtDecode(token).role);
 
   return (
     <Route
       {...rest}
       render={props =>
-        isAuthenticated && roles.includes(role) ? (
+        token && role === Role ? (
           <Component {...props} />
         ) : (
-          navigate('/unauthorized')
+          <Navigate to="/login" />
         )
       }
     />
   );
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;
+
+
 
