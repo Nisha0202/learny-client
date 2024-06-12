@@ -59,11 +59,11 @@ const StudySessions = () => {
 
 
   if (status === 'loading') {
-    return <div className='container grid place-content-center'> Loading...</div>;
+    return <div className='container grid place-item-center'> Loading...</div>;
   }
 
   if (status === 'error') {
-    return <div className='container grid place-content-center'>Error fetching data: {error.message}</div>;
+    return <div className='container grid place-item-center'>Error fetching data: {error.message}</div>;
   }
 
     let sessionsArray;
@@ -76,7 +76,7 @@ const StudySessions = () => {
   }
   if (!sessionsData ||!Array.isArray(sessionsArray)) {
     console.error('sessionsData is not an array or is null/undefined');
-    return <div>Error: Data is not in expected format</div>;
+    return <div className='container grid place-item-center'>Loading</div>;
   }
 
   return (

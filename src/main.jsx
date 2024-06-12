@@ -26,6 +26,7 @@ import Payment from './pages/Payment';
 import BookedSession from './components/BookedSession';
 import ViewDetails from './components/ViewDetails';
 import CreateNotes from './pages/CreateNotes';
+import ManageNotes from './pages/ManageNotes';
 
 const queryClient = new QueryClient()
 
@@ -101,6 +102,11 @@ const router = createBrowserRouter([
         path: "/create-notes",
         element: <CreateNotes/>,
       },
+      {
+        path: "/manage-notes",
+        element: <ManageNotes/>
+      },
+
     
     ],
   },
