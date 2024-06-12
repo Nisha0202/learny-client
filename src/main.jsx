@@ -25,6 +25,7 @@ import {
 import Payment from './pages/Payment';
 import BookedSession from './components/BookedSession';
 import ViewDetails from './components/ViewDetails';
+import CreateNotes from './pages/CreateNotes';
 
 const queryClient = new QueryClient()
 
@@ -43,18 +44,33 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      // {
+      //   path: "/student",
+      //   element: <Student />,
+      // },
       {
         path: "/student",
-        element: <Student />,
+        element: <ProtectedRoute role='student' component={Student} />,
       },
       {
         path: "/teacher",
-        element: <Teacher />,
+        element: <ProtectedRoute role='teacher' component={Teacher} />,
       },
       {
         path: "/admin",
-        element: <Admin />,
+        element: <ProtectedRoute role='admin' component={Admin} />,
       },
+
+
+
+      // {
+      //   path: "/teacher",
+      //   element: <Teacher />,
+      // },
+      // {
+      //   path: "/admin",
+      //   element: <Admin />,
+      // },
       {
         path: "/signup",
         element: <SignUp />,
@@ -80,6 +96,10 @@ const router = createBrowserRouter([
       {
         path: "/booked-sessions",
         element: <BookedSession/>,
+      },
+      {
+        path: "/create-notes",
+        element: <CreateNotes/>,
       },
     
     ],
