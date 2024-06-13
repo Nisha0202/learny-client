@@ -1,9 +1,43 @@
+// import React from 'react';
+// import { useQuery } from '@tanstack/react-query';
+// import axios from 'axios';
+
+// const fetchBookedMaterials = async () => {
+//   const { data: bookedSessions } = await axios.get('http://localhost:5000/api/bookedSession');
+//   const bookedSessionIds = bookedSessions.map(session => session.sessionId);
+//   const { data: materials } = await axios.get('http://localhost:5000/api/materials');
+//   return materials.filter(material => bookedSessionIds.includes(material.sessionId));
+// };
+
+// const ViewBookedMaterial = () => {
+//   const { data: bookedMaterials, isLoading, error } = useQuery('bookedMaterials', fetchBookedMaterials);
+
+//   if (isLoading) return 'Loading...';
+//   if (error) return 'An error has occurred: ' + error.message;
+
+//   return (
+//     <div>
+//       {bookedMaterials.map(material => (
+//         <div key={material._id.$oid}>
+//           <h2>{material.title}</h2>
+//           <img src={material.image} alt={material.title} />
+//           <a href={material.image} download>Download Image</a>
+//           {material.link && <a href={material.link} target="_blank" rel="noopener noreferrer">Visit Google Drive Link</a>}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default ViewBookedMaterial;
+
+
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import StdNav from './StdNav';
+import StdNav from '../components/StdNav';
 
 const fetchSessions = async ({ queryKey }) => {
   const [userEmail] = queryKey;
@@ -11,7 +45,7 @@ const fetchSessions = async ({ queryKey }) => {
   return data;
 };
 
-const BookedSession = () => {
+const ViewBookedMaterial = () => {
   const navigate = useNavigate();
   const { usern } = useContext(AuthContext);
   
@@ -20,6 +54,15 @@ const BookedSession = () => {
     queryKey: [usern.email],
     queryFn: fetchSessions,
   });
+
+
+  const viewDetails = (sessionId) => {
+    if (!usern) {
+      navigate('/login');
+    } else {
+      navigate(`/viewdetails/${sessionId}`);
+    }
+  };
 
   if (isLoading)
     return (
@@ -48,28 +91,18 @@ const BookedSession = () => {
         </div>
       </div>
     );
- 
-  const viewDetails = (sessionId) => {
-    if (!usern) {
-      navigate('/login');
-    } else {
-      navigate(`/viewdetails/${sessionId}`);
-    }
-  };
-
   
 
 
   return (
     <div className='container min-h-[75vh]'>
-         <StdNav/>
-         <div className='flex flex-col lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8'>
-          {sessions.map(session => {
+      <StdNav/>
+      <div className='flex flex-col lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8'>
+           {sessions.map(session => {
         const desc = session.sessionDetails.sessionDescription.split(' ').slice(0, 13).join(' ');
   
         return (
-
-          <div key={session._id} className=''>
+          <div key={session._id} className=' '>
             <div className="p-6 bg-white rounded shadow-md plus w-80 h-72 border-2">
               <h2 className="text-xl font-bold mb-2">{session.sessionDetails.sessionTitle}</h2>
               <p className='mb-3 text-blue-500'>{session.sessionDetails.registrationFee}</p>
@@ -80,9 +113,9 @@ const BookedSession = () => {
             </div>
           </div>
         );
-      })} 
-         </div>
-     
+      })}
+      </div>
+   
     </div>
   );
   
@@ -90,4 +123,4 @@ const BookedSession = () => {
 
 };
 
-export default BookedSession;
+export default ViewBookedMaterial ;

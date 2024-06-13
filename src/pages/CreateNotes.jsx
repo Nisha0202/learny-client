@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import StdNav from '../components/StdNav';
 
 const CreateNotes = () => {
   const { usern } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const CreateNotes = () => {
 
   return (
     <div className="container min-h-[75vh]">
+         <StdNav/>
         <div className='max-w-md mx-auto my-12'>
         <form onSubmit={handleSubmit} className="form-control w-full">
   <label className="label">

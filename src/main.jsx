@@ -31,6 +31,7 @@ import CreateSessions from './pages/CreateSessions';
 import RequestSession from './pages/RequestSession';
 import UploadMaterials from './pages/UplodMaterials';
 import ViewMaterials from './pages/ViewMaterials';
+import ViewBookedMaterial from './pages/ViewBookedMaterial';
 const queryClient = new QueryClient()
 
 
@@ -64,17 +65,6 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <ProtectedRoute role='admin' component={Admin} />,
       },
-
-
-
-      // {
-      //   path: "/teacher",
-      //   element: <Teacher />,
-      // },
-      // {
-      //   path: "/admin",
-      //   element: <Admin />,
-      // },
       {
         path: "/signup",
         element: <SignUp />,
@@ -124,6 +114,10 @@ const router = createBrowserRouter([
       {
         path: "/view-materials",
         element: <ViewMaterials/>
+      },
+      {
+        path: "/booked-material",
+        element: <ViewBookedMaterial/>
       }
 
     

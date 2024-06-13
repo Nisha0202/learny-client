@@ -17,22 +17,24 @@ export default function DisplayTutor() {
   });
   
   if (status === 'loading') {
-    return <div className='container grid place-item-center'> Loading...</div>;
+    return <div className='container grid place-content-center'> Loading...</div>;
   }
 
   if (status === 'error') {
-    return <div className='container grid place-item-center'>Error fetching data</div>;
+    return <div className='container grid place-content-center'>Error fetching data</div>;
   }
 
+
+
+  const uniqueTutorNames = Array.isArray(sessionsData) ? [...new Set(sessionsData.map(session => session.tutorName))] : [];
+
   return (
-    <div className='container '>
-      <div className='my-12 grid gap-5 place-content-center'>
-        <h1 className='text-xl font-bold text-center'>Our Tutors</h1>
-        <div className='flex flex-wrap gap-6' >
-          {Array.isArray(sessionsData) && sessionsData.map((session, index) => (
-            <p className='text-lg' key={index}>{session.tutorName}</p>
-          ))}
-        </div>
+    <div className='container'>
+      <h1 className='my-12 text-xl font-bold text-center'>Our Tutors</h1>
+      <div className='flex flex-wrap gap-6 place-content-center'>
+        {uniqueTutorNames.map((tutorName, index) => (
+          <p className='text-lg hover:text-blue-500' key={index}>{tutorName}</p>
+        ))}
       </div>
     </div>
   );

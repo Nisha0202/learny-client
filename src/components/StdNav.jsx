@@ -25,7 +25,7 @@ const StdNav = () => {
           <Link to="/manage-notes" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
             Manage Personal Notes
           </Link>
-          <Link to="/study-materials" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">
+          <Link to="/booked-material" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200">
             View All Study Materials
           </Link>
         </div>
