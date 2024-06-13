@@ -2,17 +2,18 @@ import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { saveAs } from 'file-saver'
 
 // Define the fetchMaterials function correctly
 const fetchMaterials = async ({ queryKey }) => {
   const [, sessionId] = queryKey;
   try {
-    console.log("hello"); // This should log if the function is called
+    console.log("hello");
     const { data } = await axios.get(`http://localhost:5000/api/material/${sessionId}`);
     return data;
   } catch (error) {
     console.error("Error fetching materials:", error);
-    throw error; // Re-throw the error to be handled by useQuery's error handling
+    throw error;
   }
 };
 
@@ -26,6 +27,14 @@ export default function BookedMaterials() {
     queryFn: fetchMaterials,
     enabled: !!sessionId, // Ensure the query runs only if sessionId is available
   });
+
+
+
+  const downloadImage = (imageUrl) => {
+    saveAs(imageUrl, 'image.jpg');
+  }
+  
+
 
   if (isLoading)
     return (
@@ -53,24 +62,45 @@ export default function BookedMaterials() {
     <div className='container min-h-[75vh]'>
       <div className=' mt-6 md:mt-8'>
         <h1>Booked Materials</h1>
-       
-            <div className=' mt-6 md:mt-8'>
-            {Array.isArray(materials) && materials.map(material => (
-        <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
-            <div className='flex flex-col gap-3 min-w-44'>
-              <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
-              {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}
+
+        <div className=' mt-6 md:mt-8'>
+          {Array.isArray(materials) && materials.map(material => (
+            <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
+              <div className='flex flex-col gap-3 min-w-44'>
+                <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
+                {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}
+              </div>
+
+              {/* {material.image && (
+                <div>
+                  <img src={material.image} className='w-24 h-24 object-contain border-2' />
+                  <a href={material.image} download className='text-blue-500'>Download Image</a>
+                </div>
+              )} */}
+              {material.image && (
+                <div>
+                  <img src={material.image} className='w-24 h-24 object-contain border-2' alt='Material' />
+
+                  <div className='btn btn-sm mt-2' onClick={() => downloadImage(material.image)}>Download!</div>
+
+
+                </div>
+              )}
+
+
+
+
+
+
+
+
             </div>
-         
-            {material.image && <img src={material.image} className='w-24 h-24 object-contain border-2'/>}
-          
+          ))}
         </div>
-      ))}
+        <div className='flex justify-end'>
+          <Link to={"/booked-session-material"} className='btn w-64 text-blue-400 text-center mt-3 font-normal'>Back</Link>
+        </div>
       </div>
-      <div className='flex justify-end'>
-        <Link to={"/booked-session-material"} className='btn w-64 text-blue-400 text-center mt-3 font-normal'>Back</Link>
-      </div>
-    </div>
     </div>
   );
 }
