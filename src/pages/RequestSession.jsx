@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'; 
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import Swal from 'sweetalert2';
+import TchNav from '../components/TchNav';
 
 const fetchSessions = async ({ queryKey }) => {
   const [, { tutorEmail }] = queryKey;
@@ -39,9 +40,39 @@ export default function RequestSession() {
     },
   });
 
+
+  if (status === 'loading')
+    return (
+      <div className='container min-h-[75vh]'>
+        <TchNav/>
+        <div className='font-bold grid place-content-center mt-4'>
+        Loading...
+        </div>
+      </div>
+    );
+  if (status === 'error')
+      return (
+        <div className='container min-h-[75vh]'>
+          <TchNav/>
+          <div className='font-bold grid place-content-center mt-4'>
+          An error has occurred
+          </div>
+        </div>
+      );
+  if (!sessionsData || sessionsData.length === 0)
+    return (
+      <div className='container min-h-[75vh]'>
+        <TchNav/>
+        <div className='font-bold grid place-content-center mt-4'>
+              No Session Created Yet
+        </div>
+      </div>
+    );
   return (
-    <div className='container flex flex-wrap gap-6 justify-around'>
-      {Array.isArray(sessionsData) && sessionsData.map((session) => (
+    <div className='container min-h-[75vh] '>
+      <TchNav/>
+      <div className='flex flex-wrap gap-6 justify-around mt-6 md:mt-8'>
+           {Array.isArray(sessionsData) && sessionsData.map((session) => (
         <div key={session._id}>
           <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
             <h2 className="text-xl font-bold mb-2 max-h-14 py-1">{session.sessionTitle}</h2>
@@ -57,6 +88,8 @@ export default function RequestSession() {
           </div>
         </div>
       ))}
+      </div>
+   
     </div>
   );
 }

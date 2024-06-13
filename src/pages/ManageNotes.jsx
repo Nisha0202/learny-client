@@ -141,7 +141,7 @@ function ManageNotes() {
     <div className='container min-h-[75vh]'>
       <StdNav />
       {notes && notes.map(note => (
-        <div key={note._id} className='w-full h-32 flex flex-col md:flex-row gap-8 border-2 p-4'>
+        <div key={note._id} className='w-full h-32 flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
           <h2 className='font-bold text-wrap text-lg'>{note.title}</h2>
           <div className='flex gap-4'>
             <button className='btn btn-sm bg-blue-500 text-white' onClick={() => openUpdateDialog(note)}>Update</button>

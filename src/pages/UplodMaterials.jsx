@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import TchNav from '../components/TchNav';
 
 
 const fetchSessions = async ({ queryKey }) => {
@@ -90,18 +91,41 @@ const uploadImage = async (imageFile) => {
 
     };
 
-    if (status === 'loading') {
-        return <div className='container grid place-item-center'> Loading...</div>;
-    }
+    if (status === 'loading')
+        return (
+          <div className='container min-h-[75vh]'>
+            <TchNav/>
+            <div className='font-bold grid place-content-center mt-4'>
+            Loading...
+            </div>
+          </div>
+        );
+      if (status === 'error')
+          return (
+            <div className='container min-h-[75vh]'>
+              <TchNav/>
+              <div className='font-bold grid place-content-center mt-4'>
+              An error has occurred
+              </div>
+            </div>
+          );
 
-    if (status === 'error') {
-        return <div className='container grid place-item-center'>Error fetching data: {error.message}</div>;
-    };
+      if (!sessionsData || sessionsData.length === 0)
+        return (
+          <div className='container min-h-[75vh]'>
+            <TchNav/>
+            <div className='font-bold grid place-content-center mt-4'>
+                  No Session Created Yet
+            </div>
+          </div>
+        );
 
     const approvedSessions = sessionsData ? sessionsData.filter(session => session.status === 'approved') : [];
 
     return (
-        <div className='container flex flex-wrap gap-6 justify-around'>
+        <div className='container min-h-[75vh]'>
+            <TchNav/>
+        <div className=' flex flex-wrap gap-6 justify-around mt-6 md:mt-8'>
             {Array.isArray(approvedSessions) && approvedSessions.length > 0 ? (
                 approvedSessions.map((session) => (
                     <div key={session._id}>
@@ -169,6 +193,8 @@ const uploadImage = async (imageFile) => {
 
 
 
+        </div>
+        
         </div>
 
     );

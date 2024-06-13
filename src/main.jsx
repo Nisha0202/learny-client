@@ -121,7 +121,7 @@ const router = createBrowserRouter([
         element: <ViewBookedMaterial/>
       },
       {
-        path: "/viewmaterials/:id",
+        path: "/viewmaterials/:sessionId",
         element: <BookedMaterials/>
       }
      

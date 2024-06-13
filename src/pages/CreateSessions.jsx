@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import TchNav from '../components/TchNav';
 
 const CreateSessions = () => {
   const { usern } = useContext(AuthContext);
@@ -51,6 +52,7 @@ const CreateSessions = () => {
 
   return (
     <div className="container min-h-[75vh]">
+      <TchNav/>
         <div className='max-w-md mx-auto my-4'>
     
         

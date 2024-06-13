@@ -24,6 +24,7 @@ const ViewBookedMaterial = () => {
 
 
   const viewMaterials = (sessionId) => {
+    // console.log(sessionId);
     if (!usern) {
       navigate('/login');
     } else {

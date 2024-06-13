@@ -3,6 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import TchNav from '../components/TchNav';
 
 function ViewMaterials() {
   const [selectedMaterial, setSelectedMaterial] = useState(null);
@@ -104,18 +105,40 @@ function ViewMaterials() {
     setSelectedMaterial(null);
   };
 
-  if (status === 'loading') {
-    return <div className='container grid place-item-center'> Loading...</div>;
-  }
-
-  if (status === 'error') {
-    return <div className='container grid place-item-center'>Error fetching data:</div>;
-  };
+  if (status === 'loading')
+    return (
+      <div className='container min-h-[75vh]'>
+        <TchNav/>
+        <div className='font-bold grid place-content-center mt-4'>
+        Loading...
+        </div>
+      </div>
+    );
+  if (status === 'error')
+      return (
+        <div className='container min-h-[75vh]'>
+          <TchNav/>
+          <div className='font-bold grid place-content-center mt-4'>
+          An error has occurred
+          </div>
+        </div>
+      );
+  if (!materials || materials.length === 0)
+    return (
+      <div className='container min-h-[75vh]'>
+        <TchNav/>
+        <div className='font-bold grid place-content-center mt-4'>
+              No Session Created Yet
+        </div>
+      </div>
+    );
 
   return (
     <div className='container min-h-[75vh]'>
-      {materials && materials.map((material) => (
-        <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4'>
+      <TchNav/>
+      <div className=' mt-6 md:mt-8'>
+           {materials && materials.map((material) => (
+        <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
             <div className='flex flex-col gap-3 min-w-44'>
               <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
               {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}
@@ -159,6 +182,8 @@ function ViewMaterials() {
           </div>
         </dialog>
       )}
+      </div>
+   
     </div>
   );
 }
