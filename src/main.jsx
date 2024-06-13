@@ -32,6 +32,7 @@ import RequestSession from './pages/RequestSession';
 import UploadMaterials from './pages/UplodMaterials';
 import ViewMaterials from './pages/ViewMaterials';
 import ViewBookedMaterial from './pages/ViewBookedMaterial';
+import BookedMaterials from './components/BookedMaterials';
 const queryClient = new QueryClient()
 
 
@@ -116,9 +117,14 @@ const router = createBrowserRouter([
         element: <ViewMaterials/>
       },
       {
-        path: "/booked-material",
+        path: "/booked-session-material",
         element: <ViewBookedMaterial/>
+      },
+      {
+        path: "/viewmaterials/:id",
+        element: <BookedMaterials/>
       }
+     
 
     
     ],

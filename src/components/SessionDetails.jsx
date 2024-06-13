@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { FaUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
@@ -12,6 +12,7 @@ const fetchSession = async ({ queryKey }) => {
   const [, id] = queryKey;
   const sessionRes = await axios.get(`http://localhost:5000/api/session/${id}`);
   const reviewsRes = await axios.get(`http://localhost:5000/api/review/${id}`);
+
   return { ...sessionRes.data, reviews: reviewsRes.data };
 };
 
@@ -24,9 +25,13 @@ const bookSession = async ({ sessionId, userEmail, tutorEmail }) => {
   return res.data;
 };
 const SessionDetails = () => {
+
   const { id } = useParams();
   const { usern } = useContext(AuthContext);
   const [role, setRole] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+
   useEffect(() => {
     const role = localStorage.getItem('role');
     if (role) {
@@ -55,13 +60,17 @@ const SessionDetails = () => {
     mutationFn: bookSession,
     onSuccess: (data) => {
       Swal.fire('Success!', data.message, 'success');
+
+
     },
     onError: (error) => {
+      setIsButtonDisabled(false);
       Swal.fire('Error!', 'Failed to book session. Please try again.', 'error');
     },
   });
 
   const handleBookNow = () => {
+    setIsButtonDisabled(true);
     if (session.registrationFee !== "Free" && session.registrationFee !== 0) {
       setRedirectToPayment();
     } else {
@@ -122,7 +131,10 @@ const SessionDetails = () => {
           )}
         </div>
 
-        <div className='flex justify-end mb-2'>
+        <div className='flex flex-col-reverse gap-6 md:flex-row justify-between w-full items-center mb-2'>
+          <div className=''>
+          <Link to={"/"} className='btn w-64 font-bold text-blue-400 text-center py-2'>Back</Link>
+          </div>
 
           <div className='flex justify-end mb-2'>
             {role !== 'student' ? (
@@ -134,6 +146,7 @@ const SessionDetails = () => {
             ) : isRegistrationOpen ? (
               <button
                 onClick={handleBookNow}
+                disabled={isButtonDisabled} // Use the state variable here
                 className="mt-2 w-64 font-bold py-2 px-2 bg-blue-500 text-white rounded">
                 Book Now
               </button>

@@ -1,36 +1,3 @@
-// import React from 'react';
-// import { useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
-
-// const fetchBookedMaterials = async () => {
-//   const { data: bookedSessions } = await axios.get('http://localhost:5000/api/bookedSession');
-//   const bookedSessionIds = bookedSessions.map(session => session.sessionId);
-//   const { data: materials } = await axios.get('http://localhost:5000/api/materials');
-//   return materials.filter(material => bookedSessionIds.includes(material.sessionId));
-// };
-
-// const ViewBookedMaterial = () => {
-//   const { data: bookedMaterials, isLoading, error } = useQuery('bookedMaterials', fetchBookedMaterials);
-
-//   if (isLoading) return 'Loading...';
-//   if (error) return 'An error has occurred: ' + error.message;
-
-//   return (
-//     <div>
-//       {bookedMaterials.map(material => (
-//         <div key={material._id.$oid}>
-//           <h2>{material.title}</h2>
-//           <img src={material.image} alt={material.title} />
-//           <a href={material.image} download>Download Image</a>
-//           {material.link && <a href={material.link} target="_blank" rel="noopener noreferrer">Visit Google Drive Link</a>}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ViewBookedMaterial;
-
 
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -56,13 +23,14 @@ const ViewBookedMaterial = () => {
   });
 
 
-  const viewDetails = (sessionId) => {
+  const viewMaterials = (sessionId) => {
     if (!usern) {
       navigate('/login');
     } else {
-      navigate(`/viewdetails/${sessionId}`);
+      navigate(`/viewmaterials/${sessionId}`);
     }
   };
+  
 
   if (isLoading)
     return (
@@ -108,7 +76,7 @@ const ViewBookedMaterial = () => {
               <p className='mb-3 text-blue-500'>{session.sessionDetails.registrationFee}</p>
               <p className="text-gray-600 h-24">{desc}...</p>
               <div className='w-full flex justify-between mt-auto'>
-                <button className='bg-blue-500 btn text-white font-semibold' onClick={() => viewDetails(session.sessionDetails._id)}>View Details</button>
+                <button className='bg-blue-500 btn text-white font-semibold' onClick={() => viewMaterials(session.sessionDetails._id)}>View Materials</button>
               </div>
             </div>
           </div>
