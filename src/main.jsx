@@ -33,6 +33,7 @@ import UploadMaterials from './pages/UplodMaterials';
 import ViewMaterials from './pages/ViewMaterials';
 import ViewBookedMaterial from './pages/ViewBookedMaterial';
 import BookedMaterials from './components/BookedMaterials';
+import ViewUsers from './pages/ViewUsers';
 const queryClient = new QueryClient()
 
 
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: "/viewmaterials/:sessionId",
         element: <BookedMaterials/>
+      },
+      {
+        path: "/all-users",
+        element: <ViewUsers/>
       }
      
 

@@ -38,6 +38,29 @@ export default function FirbaseProvider(props) {
     });
   };
   
+
+  // const createUser = (email, password, username, image, role) => {
+  //   return new Promise(async (resolve, reject) => {
+  //     try {
+  //       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  //       // Signed in 
+  //       const user = userCredential.user;
+  //       await updateProfile(user, {
+  //         displayName: username,
+  //         photoURL: image,
+  //         // Added role to user profile
+  //         role: role
+  //       });
+  //       await user.reload(); // Call reload on the user object
+  //       setUsern(user); 
+  //       resolve(user); 
+  //     } catch (error) {
+  //       console.log(error.message, error.code);
+  //       reject(error); 
+  //     }
+  //   });
+  // };
+  
   
   const signInUser = async (email, password) => {
     try {
