@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdmNav from '../components/AdmNav';
-import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 
 const ViewUsers = () => {
@@ -10,18 +10,25 @@ const ViewUsers = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    const { data: users, isError, isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: fetchUsers,
+    const { data: allUsers, isLoading, isError } = useQuery({
+        queryKey: 'users',
+        queryFn: fetchUsers
+    });
+    const { data: searchedUsers } = useQuery({
+        queryKey: ['users', searchTerm],
+        queryFn: () => fetchUsers(searchTerm),
+        enabled: !!searchTerm
     });
 
-    async function fetchUsers() {
-        const res = await fetch('http://localhost:5000/api/users');
-        if (!res.ok) {
+
+    async function fetchUsers(searchTerm = '') {
+        const res = await axios.get(`http://localhost:5000/api/users?search=${searchTerm}`);
+        if (res.status !== 200) {
             throw new Error('Network response was not ok');
         }
-        return res.json();
+        return res.data;
     }
+
 
     const queryClient = useQueryClient();
 
@@ -38,7 +45,7 @@ const ViewUsers = () => {
         try {
             await axios.put(`http://localhost:5000/api/users/${userId}`, { role: selectedRoles[userId] });
             queryClient.invalidateQueries('users');
-            Swal.fire('Success!', 'Update successful!', 'success'); // Add this line
+            Swal.fire('Success!', 'Update successful!', 'success');
         } catch (error) {
             console.error(error);
             Swal.fire('failor!', error, 'failor');
@@ -48,6 +55,7 @@ const ViewUsers = () => {
     const handleSearchChange = event => {
         setSearchTerm(event.target.value);
     };
+    const users = searchTerm ? searchedUsers : allUsers;
 
     if (isLoading)
         return (
@@ -67,20 +75,21 @@ const ViewUsers = () => {
                 </div>
             </div>
         );
-    const filteredUsers = users.filter(user => user.username.includes(searchTerm) || user.email.includes(searchTerm));
 
     return (
         <div className='container min-h-[75vh]'>
             <AdmNav />
             <div>
                 <div className='font-bold grid place-content-center mt-4 text-lg'>All Users</div>
-                <input className='min-w-64 my-4 rounded-md px-1 text-sm py-2 border-2' type="text" placeholder="Search by name or email" value={searchTerm} onChange={handleSearchChange} />
-                {filteredUsers && filteredUsers.map(user => {
-
+                <input className='min-w-64 my-4 rounded-md px-1 text-sm py-2 border-2' type="text" 
+                placeholder="Search by name or email" value={searchTerm} onChange={handleSearchChange} />
+    
+                {users && users.map(user => {
+    
                     if (user.email === 'admin@gmail.com') {
                         return null;
                     }
-
+    
                     return (
                         <div key={user._id} className='p-4 border-2 mt-2'>
                             <h2>Name: {user.username}</h2>
@@ -92,16 +101,19 @@ const ViewUsers = () => {
                                 <option value="student">Student</option>
                                 <option value="teacher">Tutor</option>
                             </select>
-
+    
                             <button className='btn ms-4 btn-sm' onClick={() => handleUpdateClick(user._id)}>Update</button>
-
+    
                         </div>
                     );
                 })}
             </div>
-
+    
         </div>
     );
+
+
+
 };
 
 export default ViewUsers;
