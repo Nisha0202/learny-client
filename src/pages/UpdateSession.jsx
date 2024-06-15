@@ -20,11 +20,6 @@ const UpdateSession = () => {
     fetchSession();
   }, []);
 
-//   const handleUpdate = () => {
-//     // Implement the update logic here
-//     console.log('Update button clicked');
-//   };
-
 const handleUpdate = async () => {
 
     try {

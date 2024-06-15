@@ -68,7 +68,8 @@ export default function BookedMaterials() {
             <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
               <div className='flex flex-col gap-3 min-w-44'>
                 <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
-                {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}
+                {material.link && <a href={material.link} className='text-blue-500' target="_blank" 
+                rel="noopener noreferrer">View Google Drive Link</a>}
               </div>
               {material.image && (
                 <div>
