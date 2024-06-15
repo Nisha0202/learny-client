@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { Link, useParams } from 'react-router-dom';
+
 
 const UpdateSession = () => {
   const [session, setSession] = useState(null);
@@ -18,9 +20,21 @@ const UpdateSession = () => {
     fetchSession();
   }, []);
 
-  const handleUpdate = () => {
-    // Implement the update logic here
-    console.log('Update button clicked');
+//   const handleUpdate = () => {
+//     // Implement the update logic here
+//     console.log('Update button clicked');
+//   };
+
+const handleUpdate = async () => {
+
+    try {
+        const { _id, ...updateData } = session;   
+         const response = await axios.put(`http://localhost:5000/api/sessions/${sessionId}`, updateData);
+      Swal.fire('Success!', 'Update successful!', 'success');
+    } catch (error) {
+      console.error('Error updating session:', error);
+      Swal.fire('failor!', 'Update failed!', 'failor');
+    }
   };
 
   if (!session) return <div>Loading...</div>;
@@ -43,13 +57,17 @@ const UpdateSession = () => {
             />
           </div>
         ))}
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+        <div className='flex flex-row gap-4'>
+            <button
+          className='bg-blue-500 btn btn-md  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
           type='button'
           onClick={handleUpdate}
         >
           Update
-        </button>
+        </button>  
+        <Link to={"/all-sessions"} className='btn btn-md py-2 px-4 rounded '>Cancle</Link>
+        </div>
+      
       </form>
     </div>
   );
