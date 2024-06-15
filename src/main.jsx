@@ -34,6 +34,12 @@ import ViewMaterials from './pages/ViewMaterials';
 import ViewBookedMaterial from './pages/ViewBookedMaterial';
 import BookedMaterials from './components/BookedMaterials';
 import ViewUsers from './pages/ViewUsers';
+import AllSessions from './pages/AllSessions';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
+
+
 const queryClient = new QueryClient()
 
 
@@ -128,6 +134,10 @@ const router = createBrowserRouter([
       {
         path: "/all-users",
         element: <ViewUsers/>
+      },
+      {
+        path: "/all-sessions",
+        element: <AllSessions/>
       }
      
 

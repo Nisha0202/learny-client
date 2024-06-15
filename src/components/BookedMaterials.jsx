@@ -70,13 +70,6 @@ export default function BookedMaterials() {
                 <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
                 {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}
               </div>
-
-              {/* {material.image && (
-                <div>
-                  <img src={material.image} className='w-24 h-24 object-contain border-2' />
-                  <a href={material.image} download className='text-blue-500'>Download Image</a>
-                </div>
-              )} */}
               {material.image && (
                 <div>
                   <img src={material.image} className='w-24 h-24 object-contain border-2' alt='Material' />

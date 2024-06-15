@@ -113,7 +113,7 @@ const SessionDetails = () => {
           <p>Class End Date:{" "} {session.classEndDate}</p>
           <p>Session Duration:{" "} {session.sessionDuration}</p>
           <p>Registration:
-            <span className='text-indigo-500 font-bold'> {session.registrationFee}</span></p>
+            <span className='text-indigo-500 font-bold'> ${session.registrationFee}</span></p>
             <p>More: {session.otherInfo}</p>
         </div>
         <div className='flex flex-col gap-3 mt-4'>

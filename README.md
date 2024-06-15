@@ -9,5 +9,6 @@
 7. npm i @tanstack/react-query
 8. npm install jwt-decode
 9. npm i file-saver
+10. npm install react-modal
 
 

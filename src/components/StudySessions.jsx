@@ -21,7 +21,7 @@ const StudySessionCard = ({ session }) => {
   return (
     <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
       <h2 className="text-xl font-bold mb-2 h-14 py-1">{session.sessionTitle}</h2>
-      <p className='mb-3 text-blue-500'>{session.registrationFee}</p>
+      <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
       <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription.split(' ').slice(0, 13).join(' ')}...</p>
       <div className='w-full flex justify-between mt-auto'>
         <button className={`mt-2 font-bold py-1  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
