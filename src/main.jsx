@@ -37,6 +37,7 @@ import ViewUsers from './pages/ViewUsers';
 import AllSessions from './pages/AllSessions';
 import Modal from 'react-modal';
 import UpdateSession from './pages/UpdateSession';
+import ViewAllMaterials from './pages/ViewAllMaterials';
 
 Modal.setAppElement('#root');
 
@@ -139,6 +140,11 @@ const router = createBrowserRouter([
       {
         path: "/update-session/:sessionId",
         element: <UpdateSession/>
+
+      },
+      {
+        path: "/view-all-material",
+        element: <ViewAllMaterials/>
 
       }
      

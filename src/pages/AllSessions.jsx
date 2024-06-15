@@ -13,7 +13,6 @@ const StudySessionCard = ({ session }) => {
     const registrationEndDate = new Date(session.registrationEndDate);
     const isRegistrationOpen = currentDate <= registrationEndDate;
     const navigate = useNavigate();
-
     const [approveModalIsOpen, setApproveModalIsOpen] = useState(false);
     const [rejectModalIsOpen, setRejectModalIsOpen] = useState(false);
     const [sessionFee, setSessionFee] = useState(0);
@@ -21,32 +20,38 @@ const StudySessionCard = ({ session }) => {
     const [rejectionReason, setRejectionReason] = useState('');
     const [feedback, setFeedback] = useState('');
 
-
-    const handleUpdate = () => {
-        // Navigate to the update page for this session
-        navigate(`/update-session/${session._id}`);
-    };
-
     const handleDelete = async () => {
-        try {
-            await axios.delete(`http://localhost:5000/api/sessions/${session._id}`)
-                .then(response => {
-                    console.log(response);
-                    Swal.fire('Success!', 'Session deleted!', 'success');
-                    setTimeout(function(){
-                        window.location.reload();
-                    }, 1000);
-                })
-                .catch(error => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axios.delete(`http://localhost:5000/api/sessions/${session._id}`)
+                        .then(response => {
+                            console.log(response);
+                            Swal.fire('Deleted!', 'Session has been deleted.', 'success');
+                            setTimeout(function(){
+                                window.location.reload();
+                            }, 1000);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire('Error!', 'Deletion failed!', 'error');
+                        });
+                } catch (error) {
                     console.error(error);
-                    Swal.fire('Error!', 'Deletion failed!', 'error');
-                });
-        } catch (error) {
-            console.error(error);
-            Swal.fire('Error!', 'Error occured!', 'error');
-        }
+                    Swal.fire('Error!', 'Error occured!', 'error');
+                }
+            }
+        })
     };
-
+    
     const openApproveModal = () => {
         setApproveModalIsOpen(true);
     };
@@ -108,6 +113,11 @@ const StudySessionCard = ({ session }) => {
         }
     };
 
+    const handleUpdate = () => {
+        // Navigate to the update page for this session
+        console.log(session._id);
+        navigate(`/update-session/${session._id}`);
+    };
     return (
         <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
             <h2 className="text-xl font-bold mb-2 h-14 py-1">{session.sessionTitle}</h2>

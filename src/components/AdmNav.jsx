@@ -43,7 +43,7 @@
              <Link to="/all-sessions" className="block mt-4 lg:ms-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
              View all study session
             </Link>
-            <Link to="/manage-notes" className="block mt-4 lg:ms-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
+            <Link to="/view-all-material" className="block mt-4 lg:ms-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
               View all materials
             </Link>
           </div>
