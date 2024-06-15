@@ -36,6 +36,7 @@ import BookedMaterials from './components/BookedMaterials';
 import ViewUsers from './pages/ViewUsers';
 import AllSessions from './pages/AllSessions';
 import Modal from 'react-modal';
+import UpdateSession from './pages/UpdateSession';
 
 Modal.setAppElement('#root');
 
@@ -57,10 +58,6 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      // {
-      //   path: "/student",
-      //   element: <Student />,
-      // },
       {
         path: "/student",
         element: <ProtectedRoute role='student' component={Student} />,
@@ -138,6 +135,11 @@ const router = createBrowserRouter([
       {
         path: "/all-sessions",
         element: <AllSessions/>
+      },
+      {
+        path: "/update-session/:sessionId",
+        element: <UpdateSession/>
+
       }
      
 

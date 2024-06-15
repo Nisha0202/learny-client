@@ -21,6 +21,32 @@ const StudySessionCard = ({ session }) => {
     const [rejectionReason, setRejectionReason] = useState('');
     const [feedback, setFeedback] = useState('');
 
+
+    const handleUpdate = () => {
+        // Navigate to the update page for this session
+        navigate(`/update-session/${session._id}`);
+    };
+
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:5000/api/sessions/${session._id}`)
+                .then(response => {
+                    console.log(response);
+                    Swal.fire('Success!', 'Session deleted!', 'success');
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire('Error!', 'Deletion failed!', 'error');
+                });
+        } catch (error) {
+            console.error(error);
+            Swal.fire('Error!', 'Error occured!', 'error');
+        }
+    };
+
     const openApproveModal = () => {
         setApproveModalIsOpen(true);
     };
@@ -44,6 +70,11 @@ const StudySessionCard = ({ session }) => {
                     console.log(response);
                     Swal.fire('Success!', 'Session approved!', 'success');
                     closeApproveModal();
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1200);
+                    
+
                 })
                 .catch(error => {
                     console.error(error);
@@ -62,6 +93,10 @@ const StudySessionCard = ({ session }) => {
                     console.log(response);
                     Swal.fire('Success!', 'Session rejected!', 'success');
                     closeRejectModal();
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                    
                 })
                 .catch(error => {
                     console.error(error);
@@ -82,17 +117,29 @@ const StudySessionCard = ({ session }) => {
                 <button className={`mt-2 font-bold py-1  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
                     {isRegistrationOpen ? 'Ongoing' : 'Closed'}
                 </button>
-                {session.status === 'pending' ? (
-                    <div className='flex flex-col gap-4 justify-end'>
-                         <button className="mt-4 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
-                    <div className='flex flex-col md:flex-row gap-4'>
-                        <button onClick={openApproveModal} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>approve?</button>
-                        <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>reject?</button>
-                    </div>
-                    </div>
-                ) : (<div>
-                    <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
-                </div>)}
+                {session.status === 'approved' && (
+            <div className='flex flex-col gap-4 justify-end'>
+                <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
+                <div className='flex flex-col md:flex-row gap-4 justify-end'>
+                    <button onClick={handleUpdate} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>Update</button>
+                    <button onClick={handleDelete} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>Delete</button>
+                </div>
+            </div>
+        )}
+        {session.status === 'pending' && (
+            <div className='flex flex-col gap-4 justify-end'>
+                <button className="mt-4 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
+                <div className='flex flex-col md:flex-row gap-4'>
+                    <button onClick={openApproveModal} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>approve?</button>
+                    <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>reject?</button>
+                </div>
+            </div>
+        )}
+        {session.status !== 'approved' && session.status !== 'pending' && (
+            <div>
+                <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
+            </div>
+        )}
             </div>
 
             <Modal 
