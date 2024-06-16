@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import AdmNav from '../components/AdmNav';
 import axios from 'axios';
+import ReactPaginate from 'react-paginate';
 
 const StudySessionCard = ({ session }) => {
     const { usern } = useContext(AuthContext);
@@ -245,8 +246,61 @@ const fetchSessions = async () => {
 };
 
 
+// const AllSessions = () => {
+//     const [displayCount, setDisplayCount] = useState(3);
+//     const { data: sessionsData, status } = useQuery({
+//         queryKey: ['sessions'],
+//         queryFn: fetchSessions,
+//         retry: 3, // retry up to 3 times
+//     });
+
+
+//     if (status === 'loading') {
+//         return <div className='container grid place-content-center'> Loading...</div>;
+//     }
+
+//     if (status === 'error') {
+//         return <div className='container grid place-content-center'>Error fetching data: {error.message}</div>;
+//     }
+
+//     let sessionsArray;
+//     if (Array.isArray(sessionsData)) {
+//         sessionsArray = sessionsData;
+//     } else if (typeof sessionsData === 'object') {
+//         sessionsArray = Object.values(sessionsData);
+//     } else {
+//         sessionsArray = [sessionsData];
+//     }
+//     if (!sessionsData || !Array.isArray(sessionsArray)) {
+//         console.error('sessionsData is not an array or is null/undefined');
+//         return <div className='container grid place-item-center'>Loading</div>;
+//     }
+
+//     return (
+//         <div className='container grid place-item-center gap-8'>
+//             <AdmNav />
+//             <div className='flex flex-wrap justify-evenly gap-4'>
+//                 {sessionsArray.map((session, index) => (
+//                     <StudySessionCard key={index} session={session} />
+//                 ))}
+//             </div>
+    
+
+//         </div>
+//     );
+
+// };
+
+// export default AllSessions;
+
+
+
+
+
 const AllSessions = () => {
-    const [displayCount, setDisplayCount] = useState(3);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
     const { data: sessionsData, status } = useQuery({
         queryKey: ['sessions'],
         queryFn: fetchSessions,
@@ -275,23 +329,38 @@ const AllSessions = () => {
         return <div className='container grid place-item-center'>Loading</div>;
     }
 
-    return (
-        <div className='container grid place-item-center gap-8'>
-            <AdmNav />
-            <div className='flex flex-wrap justify-evenly gap-4'>
-                {sessionsArray.map((session, index) => (
-                    <StudySessionCard key={index} session={session} />
-                ))}
-            </div>
-    
+  const pageCount = Math.ceil(sessionsArray.length / itemsPerPage);
 
-        </div>
-    );
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
 
+  const currentItems = sessionsArray.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+  return (
+    <div className='container grid place-item-center gap-8'>
+        <AdmNav/>
+      <div className='flex flex-wrap justify-evenly gap-4'>
+        {currentItems.map((session, index) => (
+          <StudySessionCard key={index} session={session} />
+        ))}
+      </div>
+      <ReactPaginate
+        previousLabel={'previous'}
+        nextLabel={'next'}
+        breakLabel={'...'}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageClick}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+      />
+    </div>
+  );
 };
 
 export default AllSessions;
-
 
 
 

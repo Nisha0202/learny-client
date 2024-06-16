@@ -10,11 +10,18 @@ const fetchSessions = async () => {
 };
 
 export default function DisplayTutor() {
+
   const { data: sessionsData, status } = useQuery({
-    queryKey: 'sessions',
+    queryKey: ['sessions'],
     queryFn: fetchSessions,
     retry: 3, // retry up to 3 times
   });
+  
+  // const { data: sessionsData, status } = useQuery({
+  //   queryKey: 'sessions',
+  //   queryFn: fetchSessions,
+  //   retry: 3, // retry up to 3 times
+  // });
   
   if (status === 'loading') {
     return <div className='container grid place-content-center'> Loading...</div>;

@@ -61,13 +61,32 @@ const StudySessions = () => {
   });
 
 
-  if (status === 'loading') {
-    return <div className='container grid place-content-center'> Loading...</div>;
-  }
 
-  if (status === 'error') {
-    return <div className='container grid place-content-center'>Error fetching data: {error.message}</div>;
-  }
+  if (status === 'loading')
+    return (
+      <div className='container min-h-[75vh]'>
+        <div className='font-bold grid place-content-center mt-4'>Loading...</div>
+      </div>
+    );
+
+  if (status === 'error')
+    return (
+      <div className='container min-h-[75vh]'>
+        <div className='font-bold grid place-content-center mt-4'>An error has occurred  {error.message}</div>
+      </div>
+    );
+
+  if (!sessionsData || sessionsData.length === 0)
+    return (
+      <div className='container min-h-[75vh]'>
+        <div className='font-bold grid place-content-center mt-4'>No materials</div>
+      
+      </div>
+    );
+
+
+
+
 
     let sessionsArray;
   if (Array.isArray(sessionsData)) {

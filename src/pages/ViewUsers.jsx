@@ -10,10 +10,15 @@ const ViewUsers = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
 
+    // const { data: allUsers, isLoading, isError } = useQuery({
+    //     queryKey: 'users',
+    //     queryFn: fetchUsers
+    // });
     const { data: allUsers, isLoading, isError } = useQuery({
-        queryKey: 'users',
+        queryKey: ['users'],
         queryFn: fetchUsers
-    });
+      });
+      
     const { data: searchedUsers } = useQuery({
         queryKey: ['users', searchTerm],
         queryFn: () => fetchUsers(searchTerm),

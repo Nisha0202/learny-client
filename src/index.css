@@ -65,3 +65,17 @@ font-family: "Inter", sans-serif;
 .swal2-popup-custom {
   z-index: 10000 !important;
 }
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  list-style: none;
+  justify-content: center; /* Center the pagination */
+}
+
+.pagination li {
+  border-radius: 16px;
+  border: 2px solid gray;
+  padding: 6px;
+  margin: 0 12px; /* Add some space between the page numbers */
+}

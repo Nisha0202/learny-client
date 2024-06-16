@@ -28,7 +28,8 @@ const Navbar = () => {
         setRole(decodedToken.role);
       }
     }
-  }, [usern]);
+  }, [usern, localStorage.getItem('role'), localStorage.getItem('token')]);
+
   const photoURL = usern ? usern.photoURL : undefined;
   const displayName = usern ? usern.displayName : 'name';
   const dashboardRoute = useMemo(() => {

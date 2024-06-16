@@ -110,7 +110,7 @@ const router = createBrowserRouter([
         element: <CreateSessions/>
       },
       {
-        path: "/study-session",
+        path: "/request-session",
         element: <RequestSession/>
       },
       {

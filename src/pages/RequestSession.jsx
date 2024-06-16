@@ -68,6 +68,7 @@ export default function RequestSession() {
         </div>
       </div>
     );
+
   return (
     <div className='container min-h-[75vh] '>
       <TchNav/>
@@ -81,9 +82,19 @@ export default function RequestSession() {
             {session.status !== 'rejected' ? (
               <p className='font-bold text-blue-500'>{session.status}</p>
             ) : (
+              <div>
               <button className= 'btn btn-sm bg-red-400' onClick={() => mutation.mutate(session._id)}>
                 Send Request Again
               </button>
+              {session.feedback && session.rejectionReason && (
+                <div className='mt-3 text-sm'>
+                    <p className='mb-3 text-gray-800  '>Feedback : {session.feedback}</p>
+                    <p className="text-gray-800 ">Reason: {session.rejectionReason}</p>
+                </div>
+              )}
+          
+              </div>
+              
             )}
           </div>
         </div>

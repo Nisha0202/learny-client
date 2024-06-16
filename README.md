@@ -10,5 +10,6 @@
 8. npm install jwt-decode
 9. npm i file-saver
 10. npm install react-modal
+11. npm install react-paginate --save
 
 

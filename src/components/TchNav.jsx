@@ -19,7 +19,7 @@ const TchNav = () => {
           <Link to="/create-sessions" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
           Create study session
           </Link>
-          <Link to="/study-session" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
+          <Link to="/request-session" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">
           View all study sessions
           </Link>
           <Link to="/upload-materials" className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-200 mr-4">

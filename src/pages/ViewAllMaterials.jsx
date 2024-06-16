@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import AdmNav from '../components/AdmNav';
 const ViewAllMaterials = () => {
   const [materials, setMaterials] = useState([]);
 
@@ -17,15 +18,7 @@ const ViewAllMaterials = () => {
     fetchMaterials();
   }, [materials]);
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     await axios.delete(`http://localhost:5000/api/materials/${id}`);
-  //     // Remove the deleted material from the state
-  //     setMaterials(materials.filter((material) => material._id !== id));
-  //   } catch (error) {
-  //     console.error('Error deleting material:', error);
-  //   }
-  // };
+
   const handleDelete = async (id) => {
     try {
       // Confirmation dialog with SweetAlert
@@ -57,7 +50,8 @@ const ViewAllMaterials = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <div className='flex flex-col'>
+      <AdmNav/>
+      <div className='flex flex-col mt-4 gap-2'>
         {materials.length > 0 ? (
           materials.map((material) => (
             <div key={material._id} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
