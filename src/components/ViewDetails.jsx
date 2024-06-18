@@ -7,11 +7,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-// const fetchSession = async ({ queryKey }) => {
-//     const [, id] = queryKey;
-//     const res = await axios.get(`http://localhost:5000/api/session/${id}`);
-//     return res.data;
-// };
+
 const fetchSession = async ({ queryKey }) => {
     const [, id] = queryKey;
     const sessionRes = await axios.get(`http://localhost:5000/api/session/${id}`);
