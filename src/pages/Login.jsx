@@ -51,7 +51,12 @@ export default function Login() {
         // Save the token to manage sessions securely
         localStorage.setItem('token', data.token);
   reset();
+
 navigate('/');
+setTimeout(function() {
+  window.location.reload();
+}, 1300); 
+
         
 
       } catch (error) {

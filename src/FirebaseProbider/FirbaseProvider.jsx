@@ -39,27 +39,6 @@ export default function FirbaseProvider(props) {
   };
   
 
-  // const createUser = (email, password, username, image, role) => {
-  //   return new Promise(async (resolve, reject) => {
-  //     try {
-  //       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  //       // Signed in 
-  //       const user = userCredential.user;
-  //       await updateProfile(user, {
-  //         displayName: username,
-  //         photoURL: image,
-  //         // Added role to user profile
-  //         role: role
-  //       });
-  //       await user.reload(); // Call reload on the user object
-  //       setUsern(user); 
-  //       resolve(user); 
-  //     } catch (error) {
-  //       console.log(error.message, error.code);
-  //       reject(error); 
-  //     }
-  //   });
-  // };
   
   
   const signInUser = async (email, password) => {
@@ -76,51 +55,135 @@ export default function FirbaseProvider(props) {
       throw error; 
     }
   };
-  
 
-   const googleLogin = () => {
-    return (navigate) => {
-    signInWithPopup(auth, googleprovider)
-      .then(async (result) => {
-        // setUsern(result.user); 
-        result.user.role = 'student';
-        localStorage.setItem('role', result.user.role);
 
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        setUsern(result.user);
-        const token = await result.user.getIdToken(); // Get the JWT
-        localStorage.setItem('token', token); // Store the JWT in local storage
-
-        navigate("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-      });};
+  //save user info on social login
+  const saveUserInfo = async (userInfo) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/social-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userInfo),
+      });
+      if (!response.ok) {
+        const responseBody = await response.json();
+        throw new Error(responseBody.message);
+      }
+      const data = await response.json();
+      console.log('User saved successfully:', data);
+    } catch (error) {
+      console.error('Error saving user info:', error);
+    }
   };
   
+
+  const googleLogin = () => {
+    return (navigate) => {
+      signInWithPopup(auth, googleprovider)
+        .then(async (result) => {
+          const user = result.user;
+          const userInfo = {
+            email: user.email,
+            username: user.displayName,
+            image: user.photoURL,
+            role: 'student',
+          };
+          await saveUserInfo(userInfo);
+
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const accessToken = credential.accessToken;
+          setUsern(user);
+          const token = await user.getIdToken();
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', 'student');
+          navigate('/');
+          setTimeout(function() {
+            window.location.reload();
+        }, 1000); 
+        
+        })
+        .catch((error) => {
+          console.error('Google login error:', error);
+        });
+    };
+  };
+
   const githubLogin = () => {
     return (navigate) => {
-    signInWithPopup(auth, githubprovider)
-      .then(async (result) => {
-       result.user.role = 'student';
-       localStorage.setItem('role', result.user.role);
+      signInWithPopup(auth, githubprovider)
+        .then(async (result) => {
+          const user = result.user;
+          const userInfo = {
+            email: user.email,
+            username: user.displayName,
+            image: user.photoURL,
+            role: 'student',
+          };
+          await saveUserInfo(userInfo);
 
-      const credential = GithubAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
-      setUsern(result.user);
-      const token = await result.user.getIdToken(); // Get the JWT
-      localStorage.setItem('token', token); // Store the JWT in local storage
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.email;
-    });
+          const credential = GithubAuthProvider.credentialFromResult(result);
+          const accessToken = credential.accessToken;
+          setUsern(user);
+          const token = await user.getIdToken();
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', 'student');
+          navigate('/');
+          setTimeout(function() {
+            window.location.reload();
+        }, 1000); // 1000 milliseconds = 1 second
+        
+        })
+        .catch((error) => {
+          console.error('Github login error:', error);
+        });
+    };
   };
-  };
+
+  //  const googleLogin = () => {
+  //   return (navigate) => {
+  //   signInWithPopup(auth, googleprovider)
+  //     .then(async (result) => {
+  //       // setUsern(result.user); 
+  //       result.user.role = 'student';
+  //       localStorage.setItem('role', result.user.role);
+
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const accessToken = credential.accessToken;
+  //       setUsern(result.user);
+  //       const token = await result.user.getIdToken(); // Get the JWT
+  //       localStorage.setItem('token', token); // Store the JWT in local storage
+
+  //       navigate("/");
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       const email = error.email;
+  //     });};
+  // };
+  
+  // const githubLogin = () => {
+  //   return (navigate) => {
+  //   signInWithPopup(auth, githubprovider)
+  //     .then(async (result) => {
+  //      result.user.role = 'student';
+  //      localStorage.setItem('role', result.user.role);
+
+  //     const credential = GithubAuthProvider.credentialFromResult(result);
+  //     const accessToken = credential.accessToken;
+  //     setUsern(result.user);
+  //     const token = await result.user.getIdToken(); // Get the JWT
+  //     localStorage.setItem('token', token); // Store the JWT in local storage
+  //   })
+  //   .catch((error) => {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     const email = error.email;
+  //   });
+  // };
+  // };
   
 
   const logOut = () => {

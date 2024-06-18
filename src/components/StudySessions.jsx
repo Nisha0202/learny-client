@@ -72,7 +72,7 @@ const StudySessions = () => {
   if (status === 'error')
     return (
       <div className='container min-h-[75vh]'>
-        <div className='font-bold grid place-content-center mt-4'>An error has occurred  {error.message}</div>
+        <div className='font-bold grid place-content-center mt-4'>An error has occurred</div>
       </div>
     );
 

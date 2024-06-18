@@ -89,9 +89,6 @@ export default function SignUp() {
                 });
             });
 
-
-
-
     };
 
     if(usern) return

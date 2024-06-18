@@ -26,5 +26,8 @@ github- https://github.com/programming-hero-web-course1/b9a12-client-side-Nisha0
 9. Dynamic View, Pgination
 10. Responsive Interface
 
+# Admin control
+email - admin@gmail.com
+pass - Adminn
 
 
