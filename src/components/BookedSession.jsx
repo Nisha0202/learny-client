@@ -30,21 +30,23 @@ const BookedSession = () => {
         </div>
       </div>
     );
+
   if (error)
       return (
         <div className='container min-h-[75vh]'>
           <StdNav/>
           <div className='font-bold grid place-content-center mt-4'>
-          An error has occurred
+          No data.
           </div>
         </div>
       );
+
   if (!sessions || sessions.length === 0)
     return (
       <div className='container min-h-[75vh]'>
         <StdNav/>
         <div className='font-bold grid place-content-center mt-4'>
-              No Notes Yet
+              No Booked Session Yet
         </div>
       </div>
     );
