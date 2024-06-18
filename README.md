@@ -1,3 +1,4 @@
+github- https://github.com/programming-hero-web-course1/b9a12-client-side-Nisha0202
 # React + Vite
 
 1. npm install firebase
@@ -11,5 +12,19 @@
 9. npm i file-saver
 10. npm install react-modal
 11. npm install react-paginate --save
+
+# Features of Collaborative Study Platform
+
+1. User Role-Based Authorization
+2. Sign Up and Login Authentication
+3. Booked and Create Session
+4. Convenient Payment Process
+5. Admin Control
+6. Private Routes
+7. Upload and Manage Materials
+8. Download Image
+9. Dynamic View
+10. Responsive Interface
+
 
 

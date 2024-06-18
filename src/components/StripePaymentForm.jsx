@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from 'react';
 import '../stylestripe.css';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -97,7 +96,10 @@ export default function StripePaymentForm({ session, onPaymentSuccess }) {
       Swal.fire('Success!', 'Your Payment was Successful', 'success');
       onPaymentSuccess(true);
       setProcessing(false);
+      card.clear();
       setError('');
+    }else{
+      Swal.fire('Error!', 'There was an error on payment.', 'error');
     }
 
     setProcessing(false);
@@ -122,7 +124,7 @@ export default function StripePaymentForm({ session, onPaymentSuccess }) {
             },
           }}
         />
-        <button className='btn btn-sm border-2' type="submit" disabled={!stripe || !clientSecret || processing}>
+        <button className='btn btn-sm border-2' type="submit" disabled={!stripe || !clientSecret}>
           Pay ${session.registrationFee}
         </button>
       </form>
@@ -130,6 +132,7 @@ export default function StripePaymentForm({ session, onPaymentSuccess }) {
         <p className='text-red-500 m-3'>
           {carderror}
         </p>}
+        {processing && <p className='text-blue-500 m-3 text-lg'>Loading...</p>}
     </div>
   );
 };
