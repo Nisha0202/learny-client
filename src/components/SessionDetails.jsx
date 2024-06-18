@@ -27,6 +27,9 @@ const SessionDetails = () => {
   const [role, setRole] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+
   const openPaymentModal = () => {
     setIsPaymentModalOpen(true);
   };
@@ -74,6 +77,13 @@ const SessionDetails = () => {
       mutation.mutate({ sessionId: id, userEmail: usern.email, tutorEmail: session.tutorEmail });
     }
   };
+
+  const handlePaymentSuccess = () => {
+    setPaymentSuccess(true);
+    mutation.mutate({ sessionId: id, userEmail: usern.email, tutorEmail: session.tutorEmail });
+    closePaymentModal();
+  };
+
  
   if (isLoading) return <div className='container grid place-content-center'>Loading...</div>;
   if (isError || !session) return <div className='container grid place-content-center'>Error fetching data</div>;
@@ -148,11 +158,12 @@ const SessionDetails = () => {
       </div>
 
       {isPaymentModalOpen && (
-    <PaymentModal
-      isOpen={isPaymentModalOpen}
-      onRequestClose={closePaymentModal}
-      session={session}
-    />
+     <PaymentModal
+     isOpen={isPaymentModalOpen}
+     onRequestClose={closePaymentModal}
+     session={session}
+     onPaymentSuccess={handlePaymentSuccess}
+   />
   )}
     </div>
   );
