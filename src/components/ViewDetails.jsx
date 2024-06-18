@@ -42,7 +42,7 @@ const ViewDetails = () => {
         },
     });
 
-    // Add useState hooks for review and rating
+    //hooks for review and rating
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(0);
 
@@ -51,7 +51,7 @@ const ViewDetails = () => {
         event.preventDefault();
         console.log(id);
         try {
-            // Send a POST request to your server with the review and rating
+            //POST request to your server with the review and rating
             await axios.post(`http://localhost:5000/api/review`, {
                 sessionId: id,
                 userEmail: usern.email,
@@ -66,20 +66,24 @@ const ViewDetails = () => {
             queryClient.invalidateQueries(['session', id]);
 
             document.getElementById('my_modal_1').close();
-            // Show a success alert
+
             Swal.fire('Success!', 'Your review has been submitted.', 'success');
         } catch (error) {
             console.error('Error submitting review:', error);
             document.getElementById('my_modal_1').close();
-            // Show an error alert
+
             Swal.fire('Error!', 'There was an error submitting your review. Please try again.', 'error');
         }
     };
 
+    const calculateAverageRating = () => {
+        if (!session || !session.reviews || session.reviews.length === 0) return 0;
+        const total = session.reviews.reduce((acc, reviews) => acc + reviews.rating, 0);
+        return (total / session.reviews.length).toFixed(1);
+    };
 
 
-
-
+    const averageRating = calculateAverageRating();
 
     if (isLoading) return <div className='container grid place-content-center'>Loading...</div>;
     if (isError || !session) return <div className='container grid place-content-center'>Error fetching data</div>;
@@ -90,7 +94,12 @@ const ViewDetails = () => {
                 <p className="text-gray-600 text-sm">{session.sessionDescription}</p>
                 <div className='flex flex-col md:flex-row my-4 justify-between items-center'>
                     <p>Tutor: <span className='font-bold text-lg text-blue-700'>{session.tutorName}</span></p>
-                    <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>{session.averageRating}</span> </p></div>
+
+                    <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>
+                        {averageRating > 0 ? averageRating : session.averageRating}
+                    </span></p>
+                </div>
+
                 <div className='flex flex-col gap-4 text-sm'>
                     <p>Registration Start Date: {" "}{session.registrationStartDate}</p>
                     <p className='border-2 max-w-72 border-blue-400 py-2 px-1'>Registration End Date: {" "} {session.registrationEndDate}</p>

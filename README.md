@@ -23,7 +23,7 @@ github- https://github.com/programming-hero-web-course1/b9a12-client-side-Nisha0
 6. Private Routes
 7. Upload and Manage Materials
 8. Download Image
-9. Dynamic View
+9. Dynamic View, Pgination
 10. Responsive Interface
 
 
