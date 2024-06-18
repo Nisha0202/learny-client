@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchSessions = async () => {
-  const res = await fetch('http://localhost:5000/api/session');
+  const res = await fetch('https://learny-brown.vercel.app/api/session');
   if (!res.ok) {
     throw new Error('Network response was not ok');
   }

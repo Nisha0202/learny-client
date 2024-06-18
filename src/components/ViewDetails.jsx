@@ -10,13 +10,13 @@ import axios from 'axios';
 
 const fetchSession = async ({ queryKey }) => {
     const [, id] = queryKey;
-    const sessionRes = await axios.get(`http://localhost:5000/api/session/${id}`);
-    const reviewsRes = await axios.get(`http://localhost:5000/api/review/${id}`);
+    const sessionRes = await axios.get(`https://learny-brown.vercel.app/api/session/${id}`);
+    const reviewsRes = await axios.get(`https://learny-brown.vercel.app/api/review/${id}`);
     return { ...sessionRes.data, reviews: reviewsRes.data };
 };
 
 const bookSession = async ({ sessionId, userEmail, tutorEmail }) => {
-    const res = await axios.post(`http://localhost:5000/api/bookedSession`, {
+    const res = await axios.post(`https://learny-brown.vercel.app/api/bookedSession`, {
         sessionId,
         userEmail,
         tutorEmail,
@@ -52,7 +52,7 @@ const ViewDetails = () => {
         console.log(id);
         try {
             //POST request to your server with the review and rating
-            await axios.post(`http://localhost:5000/api/review`, {
+            await axios.post(`https://learny-brown.vercel.app/api/review`, {
                 sessionId: id,
                 userEmail: usern.email,
                 userName: usern.displayName,
@@ -96,7 +96,7 @@ const ViewDetails = () => {
                     <p>Tutor: <span className='font-bold text-lg text-blue-700'>{session.tutorName}</span></p>
 
                     <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>
-                        {averageRating > 0 ? averageRating : session.averageRating}
+                        {averageRating > 0 ? averageRating : 0}
                     </span></p>
                 </div>
 

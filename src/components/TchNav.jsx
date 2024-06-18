@@ -5,7 +5,7 @@ const TchNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex flex-wrap items-center justify-between p-3 bg-blue-500 text-white">
+    <nav className="flex flex-wrap items-center justify-between p-6 bg-blue-500 text-white">
       <Link to={"/teacher"} className="flex flex-1 items-center flex-shrink-0 mr-6 font-bold text-white">
         Teacher Dashboard
       </Link>

@@ -8,7 +8,7 @@ import TchNav from '../components/TchNav';
 
 const fetchSessions = async ({ queryKey }) => {
     const [, { tutorEmail }] = queryKey;
-    const res = await fetch(`http://localhost:5000/api/session/tutor/${tutorEmail}`);
+    const res = await fetch(`https://learny-brown.vercel.app/api/session/tutor/${tutorEmail}`);
     if (!res.ok) {
         throw new Error('Network response was not ok');
     }
@@ -73,7 +73,7 @@ const uploadImage = async (imageFile) => {
         };
 
         // Send a POST request to your server to save the material
-        const res = await fetch('http://localhost:5000/api/materials', {
+        const res = await fetch('https://learny-brown.vercel.app/api/materials', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(material),
@@ -129,10 +129,10 @@ const uploadImage = async (imageFile) => {
             {Array.isArray(approvedSessions) && approvedSessions.length > 0 ? (
                 approvedSessions.map((session) => (
                     <div key={session._id}>
-                        <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
-                            <h2 className="text-xl font-bold mb-2 max-h-14 py-1">{session.sessionTitle}</h2>
+                        <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
+                            <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
                             <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
-                            <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription}</p>
+                            <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription}</p>
                             <button className='btn btn-sm bg-blue-400' onClick={() => setSelectedSession(session)}>
                                 Upload Material
                             </button>

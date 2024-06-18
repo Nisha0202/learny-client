@@ -16,7 +16,7 @@ export default function StripePaymentForm({ session, onPaymentSuccess }) {
     if (!session.registrationFee || session.registrationFee < 1) {
       return;
     }
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://learny-brown.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price: session.registrationFee })
@@ -93,7 +93,7 @@ export default function StripePaymentForm({ session, onPaymentSuccess }) {
       };
       console.log(paymentInfo);
       // Show success message
-      Swal.fire('Success!', 'Your Payment was Successful', 'success');
+      // Swal.fire('Success!', 'Your Payment was Successful', 'success');
       onPaymentSuccess(true);
       setProcessing(false);
       card.clear();

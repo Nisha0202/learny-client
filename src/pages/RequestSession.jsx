@@ -6,7 +6,7 @@ import TchNav from '../components/TchNav';
 
 const fetchSessions = async ({ queryKey }) => {
   const [, { tutorEmail }] = queryKey;
-  const res = await fetch(`http://localhost:5000/api/session/tutor/${tutorEmail}`);
+  const res = await fetch(`https://learny-brown.vercel.app/api/session/tutor/${tutorEmail}`);
   if (!res.ok) {
     throw new Error('Network response was not ok');
   }
@@ -14,7 +14,7 @@ const fetchSessions = async ({ queryKey }) => {
 };
 
 const sendRequestAgain = async (sessionId) => {
-  const res = await fetch(`http://localhost:5000/api/session/${sessionId}/request-approval`, { method: 'POST' });
+  const res = await fetch(`https://learny-brown.vercel.app/api/session/${sessionId}/request-approval`, { method: 'POST' });
   if (!res.ok) {
     throw new Error('Network response was not ok');
   }
@@ -75,21 +75,21 @@ export default function RequestSession() {
       <div className='flex flex-wrap gap-6 justify-around mt-6 md:mt-8'>
            {Array.isArray(sessionsData) && sessionsData.map((session) => (
         <div key={session._id}>
-          <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
-            <h2 className="text-xl font-bold mb-2 max-h-14 py-1">{session.sessionTitle}</h2>
+          <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
+            <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
             <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
-            <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription}</p>
+            <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription}</p>
             {session.status !== 'rejected' ? (
               <p className='font-bold text-blue-500'>{session.status}</p>
             ) : (
               <div>
-              <button className= 'btn btn-sm bg-red-400' onClick={() => mutation.mutate(session._id)}>
+              <button className= 'btn btn-sm mt-2 bg-red-400 rounded-md' onClick={() => mutation.mutate(session._id)}>
                 Send Request Again
               </button>
               {session.feedback && session.rejectionReason && (
                 <div className='mt-3 text-sm'>
-                    <p className='mb-3 text-gray-800  '>Feedback : {session.feedback}</p>
-                    <p className="text-gray-800 ">Reason: {session.rejectionReason}</p>
+                    <p className='mb-3 text-gray-800  '><span className='font-semibold'>Feedback: </span>{session.feedback}</p>
+                    <p className="text-gray-800 "><span className='font-semibold'>Reason:</span> {session.rejectionReason}</p>
                 </div>
               )}
           

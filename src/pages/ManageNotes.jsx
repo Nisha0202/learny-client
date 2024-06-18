@@ -16,7 +16,7 @@ function ManageNotes() {
 
   const fetchNotes = async () => {
     const userEmail = usern.email;
-    const response = await fetch(`http://localhost:5000/api/notes?userEmail=${userEmail}`, {
+    const response = await fetch(`https://learny-brown.vercel.app/api/notes?userEmail=${userEmail}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,7 +37,7 @@ function ManageNotes() {
 
   const updateNoteMutation = useMutation({
     mutationFn: async ({ id, title, description }) => {
-      const response = await axios.put(`http://localhost:5000/api/notes/${id}`, { title, description });
+      const response = await axios.put(`https://learny-brown.vercel.app/api/notes/${id}`, { title, description });
       return response.data;
     },
     onSuccess: () => {
@@ -58,7 +58,7 @@ function ManageNotes() {
   };
 
   // const deleteNote = (id) => {
-  //     fetch(`http://localhost:5000/api/notes/${id}`, {
+  //     fetch(`https://learny-brown.vercel.app/api/notes/${id}`, {
   //         method: 'DELETE',
   //     })
   //     .then(response => response.json())
@@ -83,7 +83,7 @@ function ManageNotes() {
     });
 
     if (result.isConfirmed) {
-      const response = await fetch(`http://localhost:5000/api/notes/${id}`, {
+      const response = await fetch(`https://learny-brown.vercel.app/api/notes/${id}`, {
         method: 'DELETE',
       });
 

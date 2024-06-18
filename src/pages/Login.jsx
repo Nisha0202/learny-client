@@ -26,7 +26,7 @@ export default function Login() {
 
     const login = async (credentials) => {
       try {
-        const response = await fetch('http://localhost:5000/api/login', {
+        const response = await fetch('https://learny-brown.vercel.app/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

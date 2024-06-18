@@ -13,7 +13,7 @@ const CreateNotes = () => {
     event.preventDefault();
     try {
         // Send a POST request to your server with the note data
-        await axios.post(`http://localhost:5000/api/notes`, {
+        await axios.post(`https://learny-brown.vercel.app/api/notes`, {
             userEmail: usern.email,
             title,
             description

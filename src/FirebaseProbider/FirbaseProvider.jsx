@@ -60,7 +60,7 @@ export default function FirbaseProvider(props) {
   //save user info on social login
   const saveUserInfo = async (userInfo) => {
     try {
-      const response = await fetch('http://localhost:5000/api/social-login', {
+      const response = await fetch('https://learny-brown.vercel.app/api/social-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -9,7 +9,7 @@ const fetchMaterials = async ({ queryKey }) => {
   const [, sessionId] = queryKey;
   try {
     console.log("hello");
-    const { data } = await axios.get(`http://localhost:5000/api/material/${sessionId}`);
+    const { data } = await axios.get(`https://learny-brown.vercel.app/api/material/${sessionId}`);
     return data;
   } catch (error) {
     console.error("Error fetching materials:", error);

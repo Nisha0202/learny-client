@@ -14,7 +14,7 @@ function ViewMaterials() {
   const fetchMaterials = async () => {
     const tutorEmail = usern.email;
     try {
-      const response = await axios.get(`http://localhost:5000/api/materials/${tutorEmail}`);
+      const response = await axios.get(`https://learny-brown.vercel.app/api/materials/${tutorEmail}`);
       return response.data;
     } catch (error) {
       throw new Error(error.response.data.message || 'An error occurred while fetching the materials');
@@ -40,7 +40,7 @@ function ViewMaterials() {
       });
     
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/api/materials/${id}`);
+        await axios.delete(`https://learny-brown.vercel.app/api/materials/${id}`);
       }
     },
     onSuccess: () => {
@@ -51,7 +51,7 @@ function ViewMaterials() {
   
   const updateMaterial = useMutation({
     mutationFn: async ({ id, updatedMaterial }) => {
-      await axios.put(`http://localhost:5000/api/materials/${id}`, updatedMaterial);
+      await axios.put(`https://learny-brown.vercel.app/api/materials/${id}`, updatedMaterial);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['materials', { tutorEmail: usern.email }]);

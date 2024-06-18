@@ -8,7 +8,7 @@ const ViewAllMaterials = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/materials');
+        const response = await axios.get('https://learny-brown.vercel.app/api/materials');
         setMaterials(response.data);
       } catch (error) {
         console.error('Error fetching materials:', error);
@@ -34,7 +34,7 @@ const ViewAllMaterials = () => {
   
       if (willDelete.value) {
         // User confirmed deletion
-        await axios.delete(`http://localhost:5000/api/materials/${id}`);
+        await axios.delete(`https://learny-brown.vercel.app/api/materials/${id}`);
         setMaterials(materials.filter((material) => material._id !== id));
   
         // Success message with SweetAlert

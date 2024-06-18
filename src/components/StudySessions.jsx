@@ -19,12 +19,12 @@ const StudySessionCard = ({ session }) => {
     }
   };
   return (
-    <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
-      <h2 className="text-xl font-bold mb-2 h-14 py-1">{session.sessionTitle}</h2>
+    <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
+      <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
       <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
-      <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription.split(' ').slice(0, 13).join(' ')}...</p>
-      <div className='w-full flex justify-between mt-auto'>
-        <button className={`mt-2 font-bold py-1  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
+      <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription.split(' ').slice(0, 13).join(' ')}...</p>
+      <div className='w-full flex justify-between  mt-auto'>
+        <button className={`mt-2 font-bold py-1 pr-2  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
           {isRegistrationOpen ? 'Ongoing' : 'Closed'}
         </button>
         <button onClick={handleReadMore} className="mt-2 py-1  rounded hover:text-blue-700 font-bold">Read More</button>
@@ -36,7 +36,7 @@ const StudySessionCard = ({ session }) => {
 
 const fetchSessions = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/session');
+    const res = await fetch('https://learny-brown.vercel.app/api/session');
     if (!res.ok) {
       throw new Error('Network response was not ok');
     }

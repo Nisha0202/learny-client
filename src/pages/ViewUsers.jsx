@@ -27,7 +27,7 @@ const ViewUsers = () => {
 
 
     async function fetchUsers(searchTerm = '') {
-        const res = await axios.get(`http://localhost:5000/api/users?search=${searchTerm}`);
+        const res = await axios.get(`https://learny-brown.vercel.app/api/users?search=${searchTerm}`);
         if (res.status !== 200) {
             throw new Error('Network response was not ok');
         }
@@ -48,7 +48,7 @@ const ViewUsers = () => {
 
     const handleUpdateClick = async (userId) => {
         try {
-            await axios.put(`http://localhost:5000/api/users/${userId}`, { role: selectedRoles[userId] });
+            await axios.put(`https://learny-brown.vercel.app/api/users/${userId}`, { role: selectedRoles[userId] });
             queryClient.invalidateQueries('users');
             Swal.fire('Success!', 'Update successful!', 'success');
         } catch (error) {

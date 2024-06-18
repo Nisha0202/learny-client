@@ -18,7 +18,7 @@ const CreateSessions = () => {
     event.preventDefault();
     try {
         // Send a POST request to your server with the session data
-        await axios.post(`http://localhost:5000/api/session`, {
+        await axios.post(`https://learny-brown.vercel.app/api/session`, {
             tutorName: usern.displayName ,
             tutorEmail: usern.email,
             sessionTitle,

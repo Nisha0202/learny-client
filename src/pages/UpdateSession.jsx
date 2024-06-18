@@ -10,7 +10,7 @@ const UpdateSession = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/sessions/${sessionId}`);
+        const response = await axios.get(`https://learny-brown.vercel.app/api/sessions/${sessionId}`);
         setSession(response.data);
       } catch (error) {
         console.error('Error fetching session:', error);
@@ -24,7 +24,7 @@ const handleUpdate = async () => {
 
     try {
         const { _id, ...updateData } = session;   
-         const response = await axios.put(`http://localhost:5000/api/sessions/${sessionId}`, updateData);
+         const response = await axios.put(`https://learny-brown.vercel.app/api/sessions/${sessionId}`, updateData);
       Swal.fire('Success!', 'Update successful!', 'success');
     } catch (error) {
       console.error('Error updating session:', error);

@@ -9,12 +9,12 @@ import { jwtDecode } from 'jwt-decode';
 import PaymentModal from './PaymentModal';
 const fetchSession = async ({ queryKey }) => {
   const [, id] = queryKey;
-  const sessionRes = await axios.get(`http://localhost:5000/api/session/${id}`);
-  const reviewsRes = await axios.get(`http://localhost:5000/api/review/${id}`);
+  const sessionRes = await axios.get(`https://learny-brown.vercel.app/api/session/${id}`);
+  const reviewsRes = await axios.get(`https://learny-brown.vercel.app/api/review/${id}`);
   return { ...sessionRes.data, reviews: reviewsRes.data };
 };
 const bookSession = async ({ sessionId, userEmail, tutorEmail }) => {
-  const res = await axios.post(`http://localhost:5000/api/bookedSession`, {
+  const res = await axios.post(`https://learny-brown.vercel.app/api/bookedSession`, {
     sessionId,
     userEmail,
     tutorEmail,
@@ -102,7 +102,7 @@ const SessionDetails = () => {
         <div className='flex flex-col md:flex-row my-4 justify-between items-center'>
           <p>Tutor: <span className='font-bold text-lg text-blue-700'>{session.tutorName}</span></p>
           <p>Average Rating: <span className='font-bold text-lg text-indigo-500'>
-            {averageRating ? averageRating : session.averageRating} </span> </p>
+            {averageRating ? averageRating : 0} </span> </p>
         </div>
         <div className='flex flex-col gap-4 text-sm'>
           <p>Registration Start Date: {" "}{session.registrationStartDate}</p>

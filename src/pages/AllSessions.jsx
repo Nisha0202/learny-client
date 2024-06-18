@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import AdmNav from '../components/AdmNav';
@@ -33,7 +33,7 @@ const StudySessionCard = ({ session }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:5000/api/sessions/${session._id}`)
+                    await axios.delete(`https://learny-brown.vercel.app/api/sessions/${session._id}`)
                         .then(response => {
                             console.log(response);
                             Swal.fire('Deleted!', 'Session has been deleted.', 'success');
@@ -69,17 +69,19 @@ const StudySessionCard = ({ session }) => {
         setRejectModalIsOpen(false);
     };
 
+    const queryClient = useQueryClient();
+
     const handleApprove = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/sessions/${session._id}`, { status: 'approved', registrationFee: isPaid ? sessionFee : 0 })
+            await axios.put(`https://learny-brown.vercel.app/api/sessions/${session._id}`, { status: 'approved', registrationFee: isPaid ? sessionFee : 0 })
                 .then(response => {
                     console.log(response);
                     Swal.fire('Success!', 'Session approved!', 'success');
                     closeApproveModal();
-                    setTimeout(function(){
-                        window.location.reload();
-                    }, 1200);
-                    
+                    // setTimeout(function(){
+                    //     window.location.reload();
+                    // }, 1200);
+                    queryClient.invalidateQueries('sessions');
 
                 })
                 .catch(error => {
@@ -94,15 +96,15 @@ const StudySessionCard = ({ session }) => {
 
     const handleReject = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/sessions/${session._id}`, { status: 'rejected', rejectionReason, feedback })
+            await axios.put(`https://learny-brown.vercel.app/api/sessions/${session._id}`, { status: 'rejected', rejectionReason, feedback })
                 .then(response => {
                     console.log(response);
                     Swal.fire('Success!', 'Session rejected!', 'success');
                     closeRejectModal();
-                    setTimeout(function(){
-                        window.location.reload();
-                    }, 1000);
-                    
+                    // setTimeout(function(){
+                    //     window.location.reload();
+                    // }, 1000);
+                    queryClient.invalidateQueries('sessions');
                 })
                 .catch(error => {
                     console.error(error);
@@ -120,29 +122,29 @@ const StudySessionCard = ({ session }) => {
         navigate(`/update-session/${session._id}`);
     };
     return (
-        <div className="p-6 bg-white rounded shadow-md plus w-80 border-2">
-            <h2 className="text-xl font-bold mb-2 h-14 py-1">{session.sessionTitle}</h2>
+        <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
+            <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
             <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
-            <p className="text-gray-600 h-24 overflow-hidden">{session.sessionDescription.split(' ').slice(0, 13).join(' ')}...</p>
+            <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription.split(' ').slice(0, 13).join(' ')}...</p>
             <div className='w-full flex items-start justify-between mt-auto'>
-                <button className={`mt-2 font-bold py-1  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
+                <button className={`mt-2 font-bold py-1 pr-2  rounded ${isRegistrationOpen ? 'text-green-700' : 'text-red-700'}`}>
                     {isRegistrationOpen ? 'Ongoing' : 'Closed'}
                 </button>
                 {session.status === 'approved' && (
-            <div className='flex flex-col gap-4 justify-end'>
+            <div className='flex flex-col gap-4'>
                 <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
-                <div className='flex flex-col md:flex-row gap-4 justify-end'>
+                <div className='flex flex-col md:flex-row gap-3'>
                     <button onClick={handleUpdate} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>Update</button>
                     <button onClick={handleDelete} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>Delete</button>
                 </div>
             </div>
         )}
         {session.status === 'pending' && (
-            <div className='flex flex-col gap-4 justify-end'>
-                <button className="mt-4 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
-                <div className='flex flex-col md:flex-row gap-4'>
-                    <button onClick={openApproveModal} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>approve?</button>
-                    <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>reject?</button>
+            <div className='flex flex-col gap-4'>
+                <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
+                <div className='flex flex-col md:flex-row gap-3'>
+                    <button onClick={openApproveModal} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>approve</button>
+                    <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>reject</button>
                 </div>
             </div>
         )}
@@ -229,7 +231,7 @@ const StudySessionCard = ({ session }) => {
 //al session
 const fetchSessions = async () => {
     try {
-        const res = await fetch('http://localhost:5000/api/session');
+        const res = await fetch('https://learny-brown.vercel.app/api/session');
         if (!res.ok) {
             throw new Error('Network response was not ok');
         }
@@ -244,57 +246,6 @@ const fetchSessions = async () => {
         throw error;
     }
 };
-
-
-// const AllSessions = () => {
-//     const [displayCount, setDisplayCount] = useState(3);
-//     const { data: sessionsData, status } = useQuery({
-//         queryKey: ['sessions'],
-//         queryFn: fetchSessions,
-//         retry: 3, // retry up to 3 times
-//     });
-
-
-//     if (status === 'loading') {
-//         return <div className='container grid place-content-center'> Loading...</div>;
-//     }
-
-//     if (status === 'error') {
-//         return <div className='container grid place-content-center'>Error fetching data: {error.message}</div>;
-//     }
-
-//     let sessionsArray;
-//     if (Array.isArray(sessionsData)) {
-//         sessionsArray = sessionsData;
-//     } else if (typeof sessionsData === 'object') {
-//         sessionsArray = Object.values(sessionsData);
-//     } else {
-//         sessionsArray = [sessionsData];
-//     }
-//     if (!sessionsData || !Array.isArray(sessionsArray)) {
-//         console.error('sessionsData is not an array or is null/undefined');
-//         return <div className='container grid place-item-center'>Loading</div>;
-//     }
-
-//     return (
-//         <div className='container grid place-item-center gap-8'>
-//             <AdmNav />
-//             <div className='flex flex-wrap justify-evenly gap-4'>
-//                 {sessionsArray.map((session, index) => (
-//                     <StudySessionCard key={index} session={session} />
-//                 ))}
-//             </div>
-    
-
-//         </div>
-//     );
-
-// };
-
-// export default AllSessions;
-
-
-
 
 
 const AllSessions = () => {

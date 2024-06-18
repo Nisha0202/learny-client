@@ -8,7 +8,7 @@ import StdNav from '../components/StdNav';
 
 const fetchSessions = async ({ queryKey }) => {
   const [userEmail] = queryKey;
-  const { data } = await axios.get(`http://localhost:5000/api/bookedSession?userEmail=${userEmail}`);
+  const { data } = await axios.get(`https://learny-brown.vercel.app/api/bookedSession?userEmail=${userEmail}`);
   return data;
 };
 
@@ -72,10 +72,10 @@ const ViewBookedMaterial = () => {
   
         return (
           <div key={session._id} className=' '>
-            <div className="p-6 bg-white rounded shadow-md plus w-80 h-72 border-2">
-              <h2 className="text-xl font-bold mb-2">{session.sessionDetails.sessionTitle}</h2>
+            <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
+              <h2 className="text-xl font-bold h-16 overflow-hidden mb-2">{session.sessionDetails.sessionTitle}</h2>
               <p className='mb-3 text-blue-500'>${session.sessionDetails.registrationFee}</p>
-              <p className="text-gray-600 h-24">{desc}...</p>
+              <p className="text-gray-600 h-28">{desc}...</p>
               <div className='w-full flex justify-between mt-auto'>
                 <button className='bg-blue-500 btn text-white font-semibold' onClick={() => viewMaterials(session.sessionDetails._id)}>View Materials</button>
               </div>
