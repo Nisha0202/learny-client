@@ -112,13 +112,17 @@ const ViewDetails = () => {
                 </div>
                 <div className='flex flex-col gap-3 mt-4'>
                     <h3 className='text-lg font-bold'>Reviews:</h3>
-                    {session.reviews.map((review, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                            <FaUserCircle className="text-blue-500" />
-                            <p className="font-bold">{review.userName}:</p>
-                            <p>{review.review}</p>
-                        </div>
-                    ))}
+                    {session.reviews.length > 0 ? (
+                        session.reviews.map((review, index) => (
+                            <div key={index} className="flex items-center gap-2">
+                                <FaUserCircle className="text-blue-500" />
+                                <p className="font-bold">{review.userName}:</p>
+                                <p>{review.review}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className='font-semibold'>No reviews yet</p>
+                    )}
                 </div>
                 <div className='flex mt-2'>
 

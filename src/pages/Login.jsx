@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider'
 import { jwtDecode } from 'jwt-decode';
 
-
 export default function Login() {
   //google sign up
   const { googleLogin, githubLogin } = useContext(AuthContext);
@@ -16,7 +15,6 @@ export default function Login() {
  
   const { signInUser } = useContext(AuthContext);
   const [formerror, setFormerror] = useState('');
-  
 
   const {
     register,
@@ -50,11 +48,9 @@ export default function Login() {
           timer: 1500
         });
       
-
         // Save the token to manage sessions securely
         localStorage.setItem('token', data.token);
   reset();
-
 navigate('/');
         
 
@@ -131,48 +127,3 @@ navigate('/');
     )
 }
 
-
-
-    // const onSubmit = (data) => {
-    //     const { email, pass } = data;
-      
-    //     const login = async (credentials) => {
-    //       try {
-    //         const response = await fetch('http://localhost:5000/api/login', {
-    //           method: 'POST',
-    //           headers: {
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify(credentials),
-    //         });
-      
-    //         if (!response.ok) {
-    //           const responseBody = await response.json();
-    //           throw new Error(responseBody.message);
-    //         }
-      
-    //         const data = await response.json();
-    //         console.log('Success:', data);
-    //         Swal.fire({
-    //           icon: 'success',
-    //           title: 'Logged in successfully',
-    //           showConfirmButton: false,
-    //           timer: 1500
-    //         });
-      
-    //         // Save the token to manage sessions securely
-    //         localStorage.setItem('token', data.token);
-    //       } catch (error) {
-    //         console.error('Error:', error);
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: 'Oops...',
-    //           text: error.message,
-    //         });
-    //       }
-    //     };
-      
-    //     // Call the login function with the user's email and password
-    //     login({ email, pass });
-    //   };
-      

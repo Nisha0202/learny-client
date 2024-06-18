@@ -65,7 +65,7 @@ const ViewAllMaterials = () => {
                   <img src={material.image} className='w-24 h-24 object-contain border-2 mt-2' alt='Material' />
                 </div>
               )}
-              {/* <button className='btn btn-sm text-red-500 mt-4'>Delete</button> */}
+           
               <button className='btn btn-sm text-red-500 mt-4' onClick={() => handleDelete(material._id)}>Remove</button>
             </div>
           ))
