@@ -13,7 +13,7 @@
 ## Technologies Used
 - **Frontend:** React, Vite, Tailwind CSS, Daisy UI, React Icons, React Hook Form, Axios, SweetAlert2, React Modal, React Paginate.
 - **Backend:** Node.js, Express.js, MongoDB Atlas, Firebase Authentication.
-- **Other:** JWT Decode, File Saver, @tanstack/react-query, JWT Token, Bcyrpt, For online payment Stripe.
+- **Other:** JWT Decode, File Saver, @tanstack/react-query, JWT Token, Bcyrpt, For online payment Stripe, ImgBB to save uploaded image on cloud.
 
 ## Admin Control
 - **Email:** admin@gmail.com
@@ -24,8 +24,10 @@ To run this project locally:
 1. Clone the frontend from [GitHub](https://github.com/Nisha0202/learny-client.git).
 3. Navigate to the cloned directory and install dependencies using `npm install`.
 5. Use your web app's Firebase configuration for social login.
-6. Since the server side is hosted in the cloud, the client side can function without local server setup.
-7. Start the development server with `npm run dev`.
+6. Set ImgBB api key for uploading image.
+7. Set Stripe client side api key.
+8. Since the server side is hosted in the cloud, the client side can function without local server setup.
+9. Start the development server with `npm run dev`.
 
 
 
