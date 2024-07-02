@@ -1,5 +1,5 @@
-website- https://learny-creative-hummingbird-4bce38.netlify.app/
-github-server-side- https://github.com/Nisha0202/learny-server
+# website- https://learny-creative-hummingbird-4bce38.netlify.app/
+# github-server-side- https://github.com/Nisha0202/learny-server
 
 ## Project Overview
 - **Concept:** Learny a collaborative study platform designed to facilitate student learning and interaction.
