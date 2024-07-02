@@ -1,6 +1,6 @@
 website- https://learny-creative-hummingbird-4bce38.netlify.app/
 
-github- https://github.com/programming-hero-web-course1/b9a12-client-side-Nisha0202
+github-server-side- https://github.com/Nisha0202/learny-server
 # React + Vite
 
 1. npm install firebase
