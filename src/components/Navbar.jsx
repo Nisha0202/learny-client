@@ -1,40 +1,42 @@
-
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 import {jwtDecode} from 'jwt-decode';
-
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { AiFillSignature } from 'react-icons/ai';
-
-
 
 const Navbar = () => {
   const { logOut, usern } = useContext(AuthContext);
   const [login, setLogin] = useState(false);
-  const [role, setRole] = useState('');
-
+  // const [role, setRole] = useState('');
+  
   // useEffect(() => {
   //   setLogin(!!usern);
-  // }, [usern]);
+  //   // window.location.reload();
+  //   const role = localStorage.getItem('role');
+  //   if (role) {
+  //     setRole(role);
+  //   } else {
+  //     const token = localStorage.getItem('token');
+  //     if (token) {
+  //       const decodedToken = jwtDecode(token);
+  //       console.log('User role:', decodedToken.role);
+  //       setRole(decodedToken.role);
+  //     }
+  //   }
+  // }, [usern, localStorage.getItem('role'), localStorage.getItem('token')]);
 
-  
-  useEffect(() => {
-    setLogin(!!usern);
-    // window.location.reload();
+  const [token, setToken] = useState(localStorage.getItem('token'));
+const [role, setRole] = useState(localStorage.getItem('role'));
 
-    const role = localStorage.getItem('role');
-    if (role) {
-      setRole(role);
-    } else {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        console.log('User role:', decodedToken.role);
-        setRole(decodedToken.role);
-      }
-    }
-  }, [usern, localStorage.getItem('role'), localStorage.getItem('token')]);
+useEffect(() => {
+  setLogin(!!usern);
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    console.log('User role:', decodedToken.role);
+    setRole(decodedToken.role);
+  }
+}, [usern, token]);
+
 
   const photoURL = usern ? usern.photoURL : undefined;
   const displayName = usern ? usern.displayName : 'name';
