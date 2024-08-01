@@ -7,29 +7,13 @@ import { AiFillSignature } from 'react-icons/ai';
 const Navbar = () => {
   const { logOut, usern } = useContext(AuthContext);
   const [login, setLogin] = useState(false);
-  // const [role, setRole] = useState('');
-  
-  // useEffect(() => {
-  //   setLogin(!!usern);
-  //   // window.location.reload();
-  //   const role = localStorage.getItem('role');
-  //   if (role) {
-  //     setRole(role);
-  //   } else {
-  //     const token = localStorage.getItem('token');
-  //     if (token) {
-  //       const decodedToken = jwtDecode(token);
-  //       console.log('User role:', decodedToken.role);
-  //       setRole(decodedToken.role);
-  //     }
-  //   }
-  // }, [usern, localStorage.getItem('role'), localStorage.getItem('token')]);
+
 
   const [token, setToken] = useState(localStorage.getItem('token'));
 const [role, setRole] = useState(localStorage.getItem('role'));
 
 useEffect(() => {
-  setLogin(!!usern);
+  setLogin(!!token || !!role);
   if (token) {
     const decodedToken = jwtDecode(token);
     console.log('User role:', decodedToken.role);

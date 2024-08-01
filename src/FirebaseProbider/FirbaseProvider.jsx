@@ -129,6 +129,7 @@ export default function FirebaseProvider(props) {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         setUsern(false);
+        location.reload();
 
       })
       .catch((error) => {

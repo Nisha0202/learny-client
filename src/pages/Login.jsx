@@ -12,7 +12,7 @@ export default function Login() {
   //google sign up
   const { googleLogin, githubLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
- 
+  const [loading, setLoading] = useState(false);
   const { signInUser } = useContext(AuthContext);
   const [formerror, setFormerror] = useState('');
 
@@ -38,7 +38,7 @@ export default function Login() {
           const responseBody = await response.json();
           throw new Error(responseBody.message);
         }
-
+setLoading(false);
         const data = await response.json();
         console.log('Success:', data);
         Swal.fire({
@@ -47,6 +47,7 @@ export default function Login() {
           showConfirmButton: false,
           timer: 1500
         });
+
       
         // Save the token to manage sessions securely
         localStorage.setItem('token', data.token);
@@ -54,7 +55,7 @@ export default function Login() {
 
 navigate('/');
 setTimeout(function() {
-  window.location.reload();
+  location.reload();
 }, 1300); 
 
         
@@ -72,6 +73,7 @@ setTimeout(function() {
 
 
   const onSubmit = (data) => {
+    setLoading(true);
     const { email, pass } = data;
     
     const signIn = async (email, pass) => {
@@ -94,14 +96,15 @@ setTimeout(function() {
             icon: 'error',
             title: 'Oops...',
             text: 'Invalid email or password.',
-        });
+           
+        }); setLoading(false);
+
     });
 };
 
 
     return (
         <div className='flex flex-col items-center gap-8 py-16 px-2'>
-
             <form onSubmit={handleSubmit(onSubmit)} className='max-w-96 mx-auto flex flex-col gap-6  inter'>
                 <label className="input input-bordered flex items-center gap-2 text-gray-600">
                     <AiOutlineMail />
@@ -115,7 +118,12 @@ setTimeout(function() {
                         {...register("pass", { required: true })} />
                     {errors.pass && <span className='text-xs text-red-500'>required field</span>}
                 </label>
+        {loading && <span className="loading grid place-items-center loading-ring loading-sm"></span>}        
                 <button type='submit' className="btn rounded-md text-white hover:bg-blue-700 bg-blue-500 font-bold">Log In</button>
+       
+
+
+
             </form>
             <div className='flex flex-col md:flex-row mx-auto gap-4'>
                 <button className="btn rounded-md bg-black text-white flex items-center gap-2 py-2 px-4 hover:bg-gray-800" onClick={() => githubLogin()(navigate)}>
@@ -125,6 +133,7 @@ setTimeout(function() {
                     <FaGoogle /> Log In with Google
                 </button>
             </div>
+
 
             <div>If you have already registered, please login.</div>
             <div>New to join? <Link to={'/signup'} className='text-blue-500 font-bold'>Register</Link></div>
