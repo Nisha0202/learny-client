@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import Swal from 'sweetalert2';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider'
-import { jwtDecode } from 'jwt-decode';
+
 
 export default function Login() {
   //google sign up
