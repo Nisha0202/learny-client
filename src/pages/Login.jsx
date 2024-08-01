@@ -56,7 +56,7 @@ setLoading(false);
 navigate('/');
 setTimeout(function() {
   location.reload();
-}, 1300); 
+}, 800); 
 
         
 
@@ -118,18 +118,18 @@ setTimeout(function() {
                         {...register("pass", { required: true })} />
                     {errors.pass && <span className='text-xs text-red-500'>required field</span>}
                 </label>
-        {loading && <span className="loading grid place-items-center loading-ring loading-sm"></span>}        
+              
                 <button type='submit' className="btn w-full rounded-md text-white hover:bg-blue-700 bg-blue-500 font-bold">Log In</button>
        
-
+{loading && <span className="loading grid place-items-center loading-ring loading-sm"></span>}  
 
 
             </form>
             <div className='flex flex-col md:flex-row mx-auto gap-4'>
-                <button className="btn rounded-md bg-black text-white flex items-center gap-2 py-2 px-4 hover:bg-gray-800" onClick={() => githubLogin()(navigate)}>
+                <button className="btn rounded-md bg-black text-white flex items-center gap-2 py-2 px-4 hover:bg-gray-800" onClick={() => githubLogin(navigate)}>
                     <FaGithub /> Log In with Github
                 </button>
-                <button className="btn rounded-md bg-red-600 text-white flex items-center gap-2 py-2 px-4 hover:bg-red-700" onClick={() => googleLogin()(navigate)}>
+                <button className="btn rounded-md bg-red-600 text-white flex items-center gap-2 py-2 px-4 hover:bg-red-700" onClick={() => googleLogin(navigate)}>
                     <FaGoogle /> Log In with Google
                 </button>
             </div>
