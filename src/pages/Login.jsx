@@ -105,7 +105,7 @@ setTimeout(function() {
 
     return (
         <div className='flex flex-col items-center gap-8 py-16 px-2'>
-            <form onSubmit={handleSubmit(onSubmit)} className='max-w-96 mx-auto flex flex-col gap-6  inter'>
+            <form onSubmit={handleSubmit(onSubmit)} className='max-w-96 mx-auto flex flex-col items-center gap-6  inter'>
                 <label className="input input-bordered flex items-center gap-2 text-gray-600">
                     <AiOutlineMail />
                     <input type="text" className="grow" placeholder="Email" name='email'
@@ -119,7 +119,7 @@ setTimeout(function() {
                     {errors.pass && <span className='text-xs text-red-500'>required field</span>}
                 </label>
         {loading && <span className="loading grid place-items-center loading-ring loading-sm"></span>}        
-                <button type='submit' className="btn rounded-md text-white hover:bg-blue-700 bg-blue-500 font-bold">Log In</button>
+                <button type='submit' className="btn w-full rounded-md text-white hover:bg-blue-700 bg-blue-500 font-bold">Log In</button>
        
 
 
