@@ -51,10 +51,11 @@ const ViewAllMaterials = () => {
   return (
     <div className='container mx-auto p-4'>
       <AdmNav/>
+      <div className='font-bold grid place-content-center mt-4 text-lg'>All Materials</div>
       <div className='flex flex-col mt-4 gap-2'>
         {materials.length > 0 ? (
           materials.map((material) => (
-            <div key={material._id} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+            <div key={material._id} className='p-4 border-2 mt-2 rounded shadow'>
 
               <p className='text-gray-700 text-base mb-4'>{material.title}</p>
               {material.link && <a href={material.link} className='text-blue-500 mb-2' target="_blank"

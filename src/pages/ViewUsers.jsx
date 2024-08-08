@@ -10,15 +10,11 @@ const ViewUsers = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    // const { data: allUsers, isLoading, isError } = useQuery({
-    //     queryKey: 'users',
-    //     queryFn: fetchUsers
-    // });
     const { data: allUsers, isLoading, isError } = useQuery({
         queryKey: ['users'],
         queryFn: fetchUsers
-      });
-      
+    });
+
     const { data: searchedUsers } = useQuery({
         queryKey: ['users', searchTerm],
         queryFn: () => fetchUsers(searchTerm),
@@ -84,19 +80,19 @@ const ViewUsers = () => {
     return (
         <div className='container min-h-[75vh]'>
             <AdmNav />
-            <div>
+            <div className='w-full'>
                 <div className='font-bold grid place-content-center mt-4 text-lg'>All Users</div>
-                <input className='min-w-64 my-4 rounded-md px-1 text-sm py-2 border-2' type="text" 
-                placeholder="Search by name or email" value={searchTerm} onChange={handleSearchChange} />
-    
+                <input className='max-w-md min-w-72 my-4 rounded-md px-1 text-sm py-2 border-2' type="text"
+                    placeholder="Search by name or email" value={searchTerm} onChange={handleSearchChange} />
+
                 {users && users.map(user => {
-    
+
                     if (user.email === 'admin@gmail.com') {
                         return null;
                     }
-    
+
                     return (
-                        <div key={user._id} className='p-4 border-2 mt-2'>
+                        <div key={user._id} className='p-4 border-2 mt-2 rounded shadow'>
                             <h2>Name: {user.username}</h2>
                             <p>Email: {user.email}</p>
                             <p>Current Role:</p>
@@ -106,14 +102,16 @@ const ViewUsers = () => {
                                 <option value="student">Student</option>
                                 <option value="teacher">Tutor</option>
                             </select>
-    
-                            <button className='btn ms-4 btn-sm' onClick={() => handleUpdateClick(user._id)}>Update</button>
-    
+
+                            <button className='btn ms-4 btn-sm bg-blue-300' onClick={() => handleUpdateClick(user._id)}>Update</button>
+
                         </div>
+                      
+
                     );
                 })}
             </div>
-    
+
         </div>
     );
 

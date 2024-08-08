@@ -22,7 +22,14 @@ font-family: "Inter", sans-serif;
   padding: 0px;
   margin: 0px auto;
   padding: 0px 8px;
+  background-color: #fefefe;
+  color: rgb(13, 13, 13);
 }
+/* styles.css */
+.min-h-custom {
+  min-height: calc(100vh - 150px);
+}
+
 .link-active {
   font-weight: bold;
   color: grey;
@@ -74,10 +81,15 @@ font-family: "Inter", sans-serif;
 }
 
 .pagination li {
-  border-radius: 16px;
-  border: 2px solid gray;
-  padding: 6px;
+  border-radius: 2px;
+  font-size: 12px;
+  border: 1.4px solid rgb(145, 144, 144);
+  padding: 3px 8px;
   margin: 0 12px; /* Add some space between the page numbers */
+}
+
+.pagination li:hover{
+  background-color: #c4c3c3;
 }
 
 .modal-overlay2 {

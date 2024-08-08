@@ -56,7 +56,7 @@ const ViewBookedMaterial = () => {
       <div className='container min-h-[75vh]'>
         <StdNav/>
         <div className='font-bold grid place-content-center mt-4'>
-              No Notes Yet
+              No Materials
         </div>
       </div>
     );

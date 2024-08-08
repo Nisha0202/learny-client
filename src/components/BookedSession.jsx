@@ -7,7 +7,11 @@ import StdNav from './StdNav';
 
 const fetchSessions = async ({ queryKey }) => {
   const [userEmail] = queryKey;
+  console.log(usern.email)
+  // const { data } = await axios.get(`http://localhost:5000/bookedSession?userEmail=${userEmail}`);
+ 
   const { data } = await axios.get(`https://learny-brown.vercel.app/bookedSession?userEmail=${userEmail}`);
+ console.log('Fetched data:', data);
   return data;
 };
 
@@ -20,7 +24,7 @@ const BookedSession = () => {
     queryKey: [usern.email],
     queryFn: fetchSessions,
   });
-
+  console.log(usern.email)
   if (isLoading)
     return (
       <div className='container min-h-[75vh]'>
@@ -36,7 +40,7 @@ const BookedSession = () => {
         <div className='container min-h-[75vh]'>
           <StdNav/>
           <div className='font-bold grid place-content-center mt-4'>
-          No data.
+          No Booked Session Yet
           </div>
         </div>
       );

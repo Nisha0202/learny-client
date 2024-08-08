@@ -44,7 +44,6 @@ Modal.setAppElement('#root');
 
 const queryClient = new QueryClient()
 
-
 const router = createBrowserRouter([
   {
     path: "/",

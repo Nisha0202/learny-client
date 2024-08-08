@@ -162,7 +162,7 @@ const StudySessionCard = ({ session }) => {
                     content: {
                         width: '240px',
                         height: '450px',
-                        margin: 'auto auto', // This will center the modal
+                        margin: 'auto auto', 
                     },
                 }}
             >

@@ -34,7 +34,36 @@ const StudySessionCard = ({ session }) => {
 };
 
 
+
+// const fetchSessions = async () => {
+
+//   try {
+//     const res = await fetch('https://learny-brown.vercel.app/api/session');
+//     if (!res.ok) {
+//       throw new Error('Network response was not ok');
+//     }
+//     const data = await res.json();
+//     if (!Array.isArray(data)) {
+//       console.error('API response is not an array');
+//       throw new Error('Invalid API response');
+//     }
+ 
+//     return data;
+    
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//     throw error;
+//   }
+// };
+
+const StudySessions = () => {
+  const [displayCount, setDisplayCount] = useState(3);
+  const [loading, setLoading] = useState(true)
+
+
+  
 const fetchSessions = async () => {
+
   try {
     const res = await fetch('https://learny-brown.vercel.app/api/session');
     if (!res.ok) {
@@ -45,20 +74,29 @@ const fetchSessions = async () => {
       console.error('API response is not an array');
       throw new Error('Invalid API response');
     }
+ setLoading(false);
     return data;
+    
+    
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
   }
 };
 
-const StudySessions = () => {
-  const [displayCount, setDisplayCount] = useState(3);
   const { data: sessionsData, status } = useQuery({
     queryKey: ['sessions'], 
     queryFn: fetchSessions,
     retry: 3, // retry up to 3 times
   });
+
+  
+  if (loading)
+    return (
+      <div className='container min-h-[75vh]'>
+        <div className='font-bold grid place-content-center mt-4'>Loading...</div>
+      </div>
+    );
 
 
 

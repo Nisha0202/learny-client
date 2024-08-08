@@ -51,7 +51,7 @@ const CreateNotes = () => {
   </label>
   <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="textarea textarea-bordered h-24" required></textarea>
 
-  <button type="submit" className="btn bg-blue-500 text-white mt-4">Create Note</button>
+  <button type="submit" className="btn bg-blue-500 hover:bg-blue-600 text-white mt-4">Create Note</button>
 </form>
 
         </div>
