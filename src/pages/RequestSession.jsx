@@ -77,8 +77,8 @@ export default function RequestSession() {
         <div key={session._id}>
           <div className="p-6 bg-white rounded shadow-md plus w-72 border-2">
             <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
-            <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
-            <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription}</p>
+            <p className='mb-2 text-blue-500'>${session.registrationFee}</p>
+            <p className="text-gray-600 h-28 mb-4 overflow-auto py-2">{session.sessionDescription}</p>
             {session.status !== 'rejected' ? (
               <p className='font-bold text-blue-500'>{session.status}</p>
             ) : (

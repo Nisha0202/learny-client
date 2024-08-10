@@ -140,7 +140,7 @@ const uploadImage = async (imageFile) => {
                     </div>
                 ))
             ) : (
-                <p>No data is approved.</p>
+                <p className='font-bold'>No Session is approved.</p>
             )}
 
             {selectedSession && (

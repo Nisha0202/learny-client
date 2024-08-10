@@ -128,7 +128,7 @@ function ViewMaterials() {
       <div className='container min-h-[75vh]'>
         <TchNav/>
         <div className='font-bold grid place-content-center mt-4'>
-              No Session Created Yet
+              No Session Created Yet or Approved
         </div>
       </div>
     );
