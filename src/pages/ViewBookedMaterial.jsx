@@ -16,6 +16,13 @@ const ViewBookedMaterial = () => {
   const navigate = useNavigate();
   const { usern } = useContext(AuthContext);
   
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );
+  }
 
   const { data: sessions, isLoading, error } = useQuery({
     queryKey: [usern.email],

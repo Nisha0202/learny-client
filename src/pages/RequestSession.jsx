@@ -23,6 +23,16 @@ const sendRequestAgain = async (sessionId) => {
 
 export default function RequestSession() {
   const { usern } = useContext(AuthContext);
+
+  
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );
+  }
+
   const { data: sessionsData, status, refetch } = useQuery({ // Add refetch to the returned values
     queryKey: ['sessions', { tutorEmail: usern.email }],
     queryFn: fetchSessions,

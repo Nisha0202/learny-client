@@ -14,6 +14,14 @@ function ManageNotes() {
 
   const queryClient = useQueryClient();
 
+
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );}
+
   const fetchNotes = async () => {
     const userEmail = usern.email;
     const response = await fetch(`https://learny-brown.vercel.app/api/notes?userEmail=${userEmail}`, {
@@ -57,21 +65,7 @@ function ManageNotes() {
     setCurrentNote(null);
   };
 
-  // const deleteNote = (id) => {
-  //     fetch(`https://learny-brown.vercel.app/api/notes/${id}`, {
-  //         method: 'DELETE',
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //         // Remove the note from the state
-  //         queryClient.invalidateQueries(['notes', usern.email]); // Invalidate the query to refetch the notes
-  //         Swal.fire('Success!', 'Your note has been deleted.', 'success');
-  //     })
-  //     .catch((error) => {
-  //         console.error('Error:', error);
-  //         Swal.fire('Error!', 'There was an error deleting your note. Please try again.', 'error');
-  //     });
-  // };
+
   const deleteNote = async (id) => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -107,27 +101,27 @@ function ManageNotes() {
   if (isLoading)
     return (
       <div className='container min-h-[75vh]'>
-        <StdNav/>
+        <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
-        Loading...
+          Loading...
         </div>
       </div>
     );
   if (error)
-      return (
-        <div className='container min-h-[75vh]'>
-          <StdNav/>
-          <div className='font-bold grid place-content-center mt-4'>
+    return (
+      <div className='container min-h-[75vh]'>
+        <StdNav />
+        <div className='font-bold grid place-content-center mt-4'>
           An error has occurred
-          </div>
         </div>
-      );
+      </div>
+    );
   if (!notes || notes.length === 0)
     return (
       <div className='container min-h-[75vh]'>
-        <StdNav/>
+        <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
-              No Notes Yet
+          No Notes Yet
         </div>
       </div>
     );
@@ -142,7 +136,11 @@ function ManageNotes() {
       <StdNav />
       {notes && notes.map(note => (
         <div key={note._id} className='w-full h-32 flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
-          <h2 className='font-bold text-wrap text-lg'>{note.title}</h2>
+          <div>
+            <h2 className='font-bold text-wrap text-lg'>{note.title}</h2>
+            <p className='text-sm mt-4'>{note.description}</p>
+          </div>
+
           <div className='flex gap-4'>
             <button className='btn btn-sm bg-blue-500 text-white' onClick={() => openUpdateDialog(note)}>Update</button>
             <button className='btn btn-sm bg-red-500 text-white' onClick={() => deleteNote(note._id)}>Delete</button>

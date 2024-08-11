@@ -17,6 +17,15 @@ const fetchSessions = async ({ queryKey }) => {
 
 export default function UploadMaterials() {
     const { usern } = useContext(AuthContext);
+
+
+    if (!usern) {
+        return (
+          <div className="container min-h-[75vh] flex justify-center items-center">
+            <p className="text-red-500 font-bold">You must be logged in to access.</p>
+          </div>
+        );
+      }
     const { data: sessionsData, status } = useQuery({
         queryKey: ['sessions', { tutorEmail: usern.email }],
         queryFn: fetchSessions,

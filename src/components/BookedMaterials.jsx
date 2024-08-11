@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { saveAs } from 'file-saver'
 
+
+
 // Define the fetchMaterials function correctly
 const fetchMaterials = async ({ queryKey }) => {
   const [, sessionId] = queryKey;
@@ -28,6 +30,7 @@ export default function BookedMaterials() {
     enabled: !!sessionId, // Ensure the query runs only if sessionId is available
   });
 
+  
 
 
   const downloadImage = (imageUrl) => {
@@ -52,16 +55,16 @@ export default function BookedMaterials() {
 
   if (!materials || materials.length === 0)
     return (
-      <div className='container min-h-[75vh]'>
-        <div className='font-bold grid place-content-center mt-4'>No materials</div>
-        <Link to={"/booked-session-material"} className='text-blue-400 text-center py-4 font-normal'>Back</Link>
+      <div className='container min-h-[75vh] flex flex-col items-center justify-center gap-2'>
+        <div className='font-bold grid place-content-center'>No materials</div>
+        <Link to={"/booked-session-material"} className='text-blue-400 text-center font-normal'>Back</Link>
       </div>
     );
 
   return (
     <div className='container min-h-[75vh]'>
       <div className=' mt-6 md:mt-8'>
-        <h1>Booked Materials</h1>
+        <h1 className='font-semibold text-center'>Booked Materials</h1>
 
         <div className=' mt-6 md:mt-8'>
           {Array.isArray(materials) && materials.map(material => (
