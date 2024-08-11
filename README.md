@@ -18,9 +18,9 @@
 ## Admin Control
 - **Email:** admin@gmail.com
 - **Password:** Adminn
-- - **Email:** student@gmail.com
+- **Email:** student@gmail.com
 - **Password:** 123456
-- - **Email:** teacher@gmail.com
+- **Email:** teacher@gmail.com
 - **Password:** 123456
 
 ## Cloning and Local Setup
