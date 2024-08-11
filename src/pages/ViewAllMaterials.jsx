@@ -2,8 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdmNav from '../components/AdmNav';
+import { jwtDecode } from 'jwt-decode';
+
+
 const ViewAllMaterials = () => {
   const [materials, setMaterials] = useState([]);
+
+  const token = localStorage.getItem('token');
+  let decodedToken = null;
+
+  if (token) {
+      try {
+          decodedToken = jwtDecode(token).role;
+      } catch (error) {
+          console.error('Invalid token');
+      }
+  }
+
+  // Check if the user is an admin
+  if (decodedToken !== 'admin') {
+      return (
+          <div className="container min-h-[75vh] flex justify-center items-center">
+              <p className="text-red-500 font-bold">Access Denied: Admins only.</p>
+          </div>
+      );
+  }
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -71,7 +94,7 @@ const ViewAllMaterials = () => {
             </div>
           ))
         ) : (
-          <p>No materials found.</p>
+          <p className='text-center w-full font-semibold text-lg h-screen'>No materials found.</p>
         )}
       </div>
     </div>

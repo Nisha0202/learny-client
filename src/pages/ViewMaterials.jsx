@@ -11,6 +11,14 @@ function ViewMaterials() {
   const dialogRef = useRef(null);
   const queryClient = useQueryClient();
 
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );
+  }
+  
   const fetchMaterials = async () => {
     const tutorEmail = usern.email;
     try {

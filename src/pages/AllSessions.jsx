@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Modal from 'react-modal';
@@ -7,9 +6,10 @@ import Swal from 'sweetalert2';
 import AdmNav from '../components/AdmNav';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
+import { jwtDecode } from 'jwt-decode';
 
 const StudySessionCard = ({ session }) => {
-    const { usern } = useContext(AuthContext);
+
     const currentDate = new Date();
     const registrationEndDate = new Date(session.registrationEndDate);
     const isRegistrationOpen = currentDate <= registrationEndDate;
@@ -21,6 +21,27 @@ const StudySessionCard = ({ session }) => {
     const [rejectionReason, setRejectionReason] = useState('');
     const [feedback, setFeedback] = useState('');
 
+    const token = localStorage.getItem('token');
+    let decodedToken = null;
+
+    if (token) {
+        try {
+            decodedToken = jwtDecode(token).role;
+        } catch (error) {
+            console.error('Invalid token');
+        }
+    }
+
+    // Check if the user is an admin
+    if (decodedToken !== 'admin') {
+        return (
+            <div className="container min-h-[75vh] flex justify-center items-center">
+                <p className="text-red-500 font-bold">Access Denied: Admins only.</p>
+            </div>
+        );
+    }
+
+    
     const handleDelete = async () => {
         Swal.fire({
             title: 'Are you sure?',

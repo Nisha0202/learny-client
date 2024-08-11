@@ -1,12 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {jwtDecode} from 'jwt-decode';
 import AdmNav from '../components/AdmNav';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 
 
 const ViewUsers = () => {
     const [selectedRoles, setSelectedRoles] = useState({});
+
+      
+    const token = localStorage.getItem('token');
+    let decodedToken = null;
+
+    if (token) {
+        try {
+            decodedToken = jwtDecode(token).role;
+        } catch (error) {
+            console.error('Invalid token');
+        }
+    }
+
+    // Check if the user is an admin
+    if (decodedToken !== 'admin') {
+        return (
+            <div className="container min-h-[75vh] flex justify-center items-center">
+                <p className="text-red-500 font-bold">Access Denied: Admins only.</p>
+            </div>
+        );
+    }
+
+
 
     const [searchTerm, setSearchTerm] = useState('');
 

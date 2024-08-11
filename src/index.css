@@ -112,7 +112,11 @@ font-family: "Inter", sans-serif;
   border-radius: 4px; /* Optional: for rounded corners */
 }
 
-input[type="file"] {
+/* input[type="file"] {
+  display: none;
+} */
+
+#file-upload{
   display: none;
 }
 
