@@ -17,7 +17,12 @@ useEffect(() => {
   if (token) {
     const decodedToken = jwtDecode(token);
     console.log('User role:', decodedToken.role);
-    setRole(decodedToken.role);
+    if(!role){
+      setRole(decodedToken.role);
+    }
+    
+
+
   }
 }, [usern, token]);
 
@@ -25,6 +30,7 @@ useEffect(() => {
   const photoURL = usern ? usern.photoURL : undefined;
   console.log(photoURL);
   const displayName = usern ? usern.displayName : 'name';
+
   const dashboardRoute = useMemo(() => {
     console.log(role);
    

@@ -29,5 +29,10 @@ To run this project locally:
 8. Since the server side is hosted in the cloud, the client side can function without local server setup.
 9. Start the development server with `npm run dev`.
 
-
+  {/* <label for="file-upload" class="custom-file-upload w-full rounded-lg">
+          <div className='flex gap-4 items-center w-full py-1.5'>  <MdOutlinePhotoLibrary /> <p>Profile Picture</p>  </div>
+      
+        </label>
+        <input id="file-upload" type="file" className="input " name='image' 
+            {...register("image")} /> */}
 
