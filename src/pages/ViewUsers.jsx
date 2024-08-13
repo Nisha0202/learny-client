@@ -128,7 +128,7 @@ const ViewUsers = () => {
                                 <option value="teacher">Tutor</option>
                             </select>
 
-                            <button className='btn ms-4 btn-sm bg-blue-300' onClick={() => handleUpdateClick(user._id)}>Update</button>
+                            <button className='btn ms-4 btn-sm bg-blue-300 hover:bg-blue-400' onClick={() => handleUpdateClick(user._id)}>Update</button>
 
                         </div>
                       

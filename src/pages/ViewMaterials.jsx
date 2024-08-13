@@ -154,8 +154,8 @@ function ViewMaterials() {
          
             {material.image && <img src={material.image} className='w-24 h-24 object-contain border-2'/>}
             <div className='flex gap-4 items-center'> 
-              <button className='btn btn-sm bg-red-500 text-white' onClick={() => deleteMaterial.mutateAsync(material._id)}>Delete</button>
-              <button className='btn btn-sm  bg-blue-500 text-white' onClick={() => setSelectedMaterial(material)}>Update</button>
+              <button className='btn btn-sm bg-red-500 hover:bg-red-600 text-white' onClick={() => deleteMaterial.mutateAsync(material._id)}>Delete</button>
+              <button className='btn btn-sm  bg-blue-500 hover:bg-blue-600 text-white' onClick={() => setSelectedMaterial(material)}>Update</button>
             </div>
         </div>
       ))}

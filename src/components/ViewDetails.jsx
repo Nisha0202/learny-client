@@ -130,7 +130,7 @@ const ViewDetails = () => {
                         <div className=''>
                             <Link to={"/booked-sessions"} className='btn w-64 font-bold text-blue-400 text-center py-2'>Back</Link>
                         </div>
-                        <div className='btn w-64 bg-blue-600 text-white' onClick={() => document.getElementById('my_modal_1').showModal()}>
+                        <div className='btn w-64 bg-blue-600 hover:bg-blue-600 text-white' onClick={() => document.getElementById('my_modal_1').showModal()}>
                             Review Session
                         </div>
                     </div>
@@ -158,7 +158,7 @@ const ViewDetails = () => {
                                         Rating:
                                         <input className='border-2' type="number" step="0.1" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} required />/5
                                     </label>
-                                    <button className='btn btn-md bg-blue-800 text-white' type="submit">Submit Review</button>
+                                    <button className='btn btn-md bg-blue-800 hover:bg-blue-700 text-white' type="submit">Submit Review</button>
                                 </form>
 
                             </div>

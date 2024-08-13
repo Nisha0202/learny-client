@@ -138,7 +138,7 @@ export default function UploadMaterials() {
                                 <h2 className="text-xl font-bold mb-2 h-16 py-1 overflow-hidden">{session.sessionTitle}</h2>
                                 <p className='mb-3 text-blue-500'>${session.registrationFee}</p>
                                 <p className="text-gray-600 h-28 overflow-hidden">{session.sessionDescription}</p>
-                                <button className='btn btn-sm bg-blue-400' onClick={() => setSelectedSession(session)}>
+                                <button className='btn btn-sm bg-blue-400 hover:bg-blue-600' onClick={() => setSelectedSession(session)}>
                                     Upload Material
                                 </button>
                             </div>

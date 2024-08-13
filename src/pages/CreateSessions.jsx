@@ -152,7 +152,7 @@ const CreateSessions = () => {
                   <div className="loading loading-ring loading-lg text-indigo-500"></div>
                 </div>
               ) : (
-                <button type='submit' className="w-full py-2 rounded-md text-white hover:bg-blue-700 bg-blue-500 font-bold">Create</button>
+                <button type='submit' className="w-full py-2 rounded-md text-white hover:bg-blue-800 bg-blue-600 font-bold">Create</button>
               )}
             </div>
           }

@@ -99,9 +99,7 @@ const StudySessionCard = ({ session }) => {
                     console.log(response);
                     Swal.fire('Success!', 'Session approved!', 'success');
                     closeApproveModal();
-                    // setTimeout(function(){
-                    //     window.location.reload();
-                    // }, 1200);
+                 
                     queryClient.invalidateQueries('sessions');
 
                 })
@@ -122,9 +120,7 @@ const StudySessionCard = ({ session }) => {
                     console.log(response);
                     Swal.fire('Success!', 'Session rejected!', 'success');
                     closeRejectModal();
-                    // setTimeout(function(){
-                    //     window.location.reload();
-                    // }, 1000);
+                 
                     queryClient.invalidateQueries('sessions');
                 })
                 .catch(error => {
@@ -165,7 +161,7 @@ const StudySessionCard = ({ session }) => {
                 <button className="mt-2 py-1 btn btn-sm  rounded hover:text-blue-700 font-bold">{session.status}</button>
                 <div className='flex flex-col md:flex-row gap-3'>
                     <button onClick={openApproveModal} className='mt-2 py-1 btn btn-sm rounded hover:text-blue-700 font-bold'>approve</button>
-                    <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded hover:text-red-700 font-bold'>reject</button>
+                    <button onClick={openRejectModal} className='mt-2 py-1 btn btn-sm rounded text-red-400 hover:text-red-700 font-bold'>reject</button>
                 </div>
             </div>
         )}
@@ -206,8 +202,8 @@ const StudySessionCard = ({ session }) => {
                         )}
                     </div>
                     <div className='flex flex-col md:flex-row gap-6'>
-                        <button className='btn btn-sm bg-blue-400' onClick={handleApprove}>Approve</button>
-                        <button className='btn btn-sm' onClick={closeApproveModal}>Cancel</button>
+                        <button className='btn btn-sm bg-blue-400 hover:bg-blue-500' onClick={handleApprove}>Approve</button>
+                        <button className='btn btn-sm text-red-600' onClick={closeApproveModal}>Cancel</button>
                     </div>
                 </div>
             </Modal>
@@ -236,7 +232,7 @@ const StudySessionCard = ({ session }) => {
                         </label>
                     </div>
                     <div className='flex flex-col md:flex-row gap-6'>
-                        <button className='btn btn-sm bg-red-400' onClick={handleReject}>Reject</button>
+                        <button className='btn btn-sm bg-red-400 hover:bg-red-600' onClick={handleReject}>Reject</button>
                         <button className='btn btn-sm' onClick={closeRejectModal}>Cancel</button>
                     </div>
                 </div>

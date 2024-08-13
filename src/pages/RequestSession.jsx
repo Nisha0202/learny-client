@@ -93,7 +93,7 @@ export default function RequestSession() {
               <p className='font-bold text-blue-500'>{session.status}</p>
             ) : (
               <div>
-              <button className= 'btn btn-sm mt-2 bg-red-400 rounded-md' onClick={() => mutation.mutate(session._id)}>
+              <button className= 'btn btn-sm mt-2 bg-red-400 hover:bg-red-300 rounded-md' onClick={() => mutation.mutate(session._id)}>
                 Send Request Again
               </button>
               {session.feedback && session.rejectionReason && (

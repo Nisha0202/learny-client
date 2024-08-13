@@ -84,7 +84,7 @@ const ViewBookedMaterial = () => {
               <p className='mb-3 text-blue-500'>${session.sessionDetails.registrationFee}</p>
               <p className="text-gray-600 h-28">{desc}...</p>
               <div className='w-full flex justify-between mt-auto'>
-                <button className='bg-blue-500 btn text-white font-semibold' onClick={() => viewMaterials(session.sessionDetails._id)}>View Materials</button>
+                <button className='bg-blue-500 hover:bg-blue-600 btn text-white font-semibold' onClick={() => viewMaterials(session.sessionDetails._id)}>View Materials</button>
               </div>
             </div>
           </div>

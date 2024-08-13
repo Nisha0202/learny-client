@@ -11,7 +11,7 @@ function ManageNotes() {
   const [currentNote, setCurrentNote] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
+  const [loading, setLoading] = useState(true);
   const queryClient = useQueryClient();
 
 
@@ -20,10 +20,12 @@ function ManageNotes() {
       <div className="container min-h-[75vh] flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to access.</p>
       </div>
-    );}
+    );
+  }
 
   const fetchNotes = async () => {
     const userEmail = usern.email;
+
     const response = await fetch(`https://learny-brown.vercel.app/api/notes?userEmail=${userEmail}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -32,6 +34,7 @@ function ManageNotes() {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+    setLoading(false);
     return response.json();
   };
 
@@ -142,8 +145,8 @@ function ManageNotes() {
           </div>
 
           <div className='flex gap-4'>
-            <button className='btn btn-sm bg-blue-500 text-white' onClick={() => openUpdateDialog(note)}>Update</button>
-            <button className='btn btn-sm bg-red-500 text-white' onClick={() => deleteNote(note._id)}>Delete</button>
+            <button className='btn btn-sm bg-blue-500 hover:bg-blue-600 text-white' onClick={() => openUpdateDialog(note)}>Update</button>
+            <button className='btn btn-sm bg-red-500 hover:bg-red-600 text-white' onClick={() => deleteNote(note._id)}>Delete</button>
 
 
           </div>
@@ -170,11 +173,16 @@ function ManageNotes() {
                   Description:
                   <input className='border-2' type="text" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 </label>
-                <button className='btn btn-md bg-blue-800 text-white' type="submit">Update</button>
+                <button className='btn btn-md bg-blue-800 hover:bg-blue-700 text-white' type="submit">Update</button>
               </form>
             </div>
           </div>
         </dialog>
+      )}
+      {loading && (
+        <div className="absolute inset-0 flex justify-center my-2 items-center">
+          <div className="loading loading-ring loading-xl text-indigo-500"></div>
+        </div>
       )}
     </div>
   );

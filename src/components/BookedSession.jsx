@@ -81,7 +81,7 @@ const BookedSession = () => {
                 <p className="text-gray-600 h-28">{desc}...</p>
                 <div className='w-full flex justify-between mt-auto'>
                   <button
-                    className='bg-blue-500 btn text-white font-semibold'
+                    className='bg-blue-500 hover:bg-blue-600 btn text-white font-semibold'
                     onClick={() => viewDetails(session.sessionDetails._id)}
                   >
                     View Details
