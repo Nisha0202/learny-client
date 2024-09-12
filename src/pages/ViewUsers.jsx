@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import AdmNav from '../components/AdmNav';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
@@ -10,7 +10,7 @@ import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
 const ViewUsers = () => {
     const [selectedRoles, setSelectedRoles] = useState({});
 
-      
+
     const token = localStorage.getItem('token');
     let decodedToken = null;
 
@@ -40,7 +40,7 @@ const ViewUsers = () => {
         queryFn: fetchUsers
     });
 
-    const { data: searchedUsers } = useQuery({
+    const { data: searchedUsers, isLoading: isSearchLoading } = useQuery({
         queryKey: ['users', searchTerm],
         queryFn: () => fetchUsers(searchTerm),
         enabled: !!searchTerm
@@ -83,7 +83,7 @@ const ViewUsers = () => {
     };
     const users = searchTerm ? searchedUsers : allUsers;
 
-    if (isLoading)
+    if (isLoading || isSearchLoading)
         return (
             <div className='container  '>
                 <AdmNav />
@@ -110,6 +110,20 @@ const ViewUsers = () => {
                 <input className='max-w-md min-w-72 my-4 rounded-md px-1 text-sm py-2 border-2' type="text"
                     placeholder="Search by name or email" value={searchTerm} onChange={handleSearchChange} />
 
+                {/* Show loading while search is happening */}
+                {isSearchLoading && (
+                    <div className='font-bold mt-4'>
+                        Searching...
+                    </div>
+                )}
+
+                {/* Display No User Found if the users array is empty */}
+                {users && users.length === 0 && !isSearchLoading && (
+                    <div className='font-bold grid place-content-center mt-4 text-red-500'>
+                        No users found.
+                    </div>
+                )}
+
                 {users && users.map(user => {
 
                     if (user.email === 'admin@gmail.com') {
@@ -117,7 +131,7 @@ const ViewUsers = () => {
                     }
 
                     return (
-                        <div key={user._id} className='p-4 border-2 mt-2 rounded shadow'>
+                        <div key={user._id} className='p-4 border-2 mt-2 rounded shadow max-w-md'>
                             <h2>Name: {user.username}</h2>
                             <p>Email: {user.email}</p>
                             <p>Current Role:</p>
@@ -131,7 +145,7 @@ const ViewUsers = () => {
                             <button className='btn ms-4 btn-sm bg-blue-300 hover:bg-blue-400' onClick={() => handleUpdateClick(user._id)}>Update</button>
 
                         </div>
-                      
+
 
                     );
                 })}

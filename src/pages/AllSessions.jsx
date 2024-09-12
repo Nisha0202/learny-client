@@ -277,11 +277,11 @@ const AllSessions = () => {
 
 
     if (status === 'loading') {
-        return <div className='container grid place-content-center'> Loading...</div>;
+        return <div className='container w-full flex justify-center items-center'> Loading...</div>;
     }
 
     if (status === 'error') {
-        return <div className='container grid place-content-center'>Error fetching data: {error.message}</div>;
+        return <div className='container w-full flex justify-center items-center'>Error fetching data: {error.message}</div>;
     }
 
     let sessionsArray;
@@ -294,7 +294,7 @@ const AllSessions = () => {
     }
     if (!sessionsData || !Array.isArray(sessionsArray)) {
         console.error('sessionsData is not an array or is null/undefined');
-        return <div className='container grid place-item-center'>Loading</div>;
+        return <div className='container w-full flex justify-center items-center'>Loading...</div>;
     }
 
   const pageCount = Math.ceil(sessionsArray.length / itemsPerPage);
