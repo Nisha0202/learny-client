@@ -9,16 +9,6 @@ const BookedSession = () => {
   const navigate = useNavigate();
   const { usern } = useContext(AuthContext);
 
-
-  // Redirect to login if user is not available
-  if (!usern) {
-    return (
-      <div className="container   flex justify-center items-center">
-        <p className="text-red-500 font-bold">You must be logged in to access.</p>
-      </div>
-    );
-  }
-
   const fetchSessions = async (userEmail) => {
     const { data } = await axios.get(`https://learny-brown.vercel.app/api/bookedSession?userEmail=${userEmail}`);
     return data;
@@ -30,6 +20,15 @@ const BookedSession = () => {
     queryFn: () => fetchSessions(usern.email),
     enabled: !!usern?.email, 
   });
+
+    // Redirect to login if user is not available
+    if (!usern) {
+      return (
+        <div className="container   flex justify-center items-center">
+          <p className="text-red-500 font-bold">You must be logged in to access.</p>
+        </div>
+      );
+    }
 
   if (isLoading)
     return (

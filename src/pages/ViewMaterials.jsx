@@ -12,7 +12,6 @@ function ViewMaterials() {
   const dialogRef = useRef(null);
   const queryClient = useQueryClient();
 
-
   const fetchMaterials = async () => {
     const tutorEmail = usern.email;
     try {
@@ -46,6 +45,7 @@ function ViewMaterials() {
         await axios.delete(`https://learny-brown.vercel.app/api/materials/${id}`);
       }
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries(['materials', { tutorEmail: usern.email }]);
       Swal.fire('Deleted!', 'Your material has been deleted.', 'success');
