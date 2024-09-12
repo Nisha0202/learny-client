@@ -4,7 +4,7 @@ import TchNav from '../components/TchNav'
 
 export default function Teacher() {
   return (
-    <div className='container min-h-[72vh]'>
+    <div className='container '>
 
       <TchNav/>
       <div className='container text-center'>

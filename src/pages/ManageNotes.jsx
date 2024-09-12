@@ -97,7 +97,7 @@ function ManageNotes() {
 
   if (!usern) {
     return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
+      <div className="container   flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to access.</p>
       </div>
     );
@@ -105,7 +105,7 @@ function ManageNotes() {
 
   if (isLoading)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           Loading...
@@ -114,7 +114,7 @@ function ManageNotes() {
     );
   if (error)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           An error has occurred
@@ -123,7 +123,7 @@ function ManageNotes() {
     );
   if (!notes || notes.length === 0)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           No Notes Yet
@@ -137,7 +137,7 @@ function ManageNotes() {
 
 
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container  '>
       <StdNav />
       {notes && notes.map(note => (
         <div key={note._id} className='h-44 items-center  flex max-w-md flex-wrap gap-8 border-2 w-full p-4 mt-2'>

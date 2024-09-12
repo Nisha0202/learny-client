@@ -25,7 +25,7 @@ const ViewUsers = () => {
     // Check if the user is an admin
     if (decodedToken !== 'admin') {
         return (
-            <div className="container min-h-[75vh] flex justify-center items-center">
+            <div className="container   flex justify-center items-center">
                 <p className="text-red-500 font-bold">Access Denied: Admins only.</p>
             </div>
         );
@@ -85,7 +85,7 @@ const ViewUsers = () => {
 
     if (isLoading)
         return (
-            <div className='container min-h-[75vh]'>
+            <div className='container  '>
                 <AdmNav />
                 <div className='font-bold grid place-content-center mt-4'>
                     Loading...
@@ -94,7 +94,7 @@ const ViewUsers = () => {
         );
     if (isError)
         return (
-            <div className='container min-h-[75vh]'>
+            <div className='container  '>
                 <AdmNav />
                 <div className='font-bold grid place-content-center mt-4'>
                     An error has occurred
@@ -103,7 +103,7 @@ const ViewUsers = () => {
         );
 
     return (
-        <div className='container min-h-[75vh]'>
+        <div className='container  '>
             <AdmNav />
             <div className='w-full'>
                 <div className='font-bold grid place-content-center mt-4 text-lg'>All Users</div>

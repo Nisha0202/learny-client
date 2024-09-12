@@ -54,7 +54,7 @@ function ViewMaterials() {
 
   if (!usern) {
     return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
+      <div className="container   flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to access.</p>
       </div>
     );
@@ -118,7 +118,7 @@ function ViewMaterials() {
 
   if (status === 'loading')
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <TchNav />
         <div className='font-bold grid place-content-center mt-4'>
           Loading...
@@ -127,7 +127,7 @@ function ViewMaterials() {
     );
   if (status === 'error')
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <TchNav />
         <div className='font-bold grid place-content-center mt-4'>
           An error has occurred
@@ -136,7 +136,7 @@ function ViewMaterials() {
     );
   if (!materials || materials.length === 0)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <TchNav />
         <div className='font-bold grid place-content-center mt-4'>
           No Session Created Yet or Approved
@@ -145,7 +145,7 @@ function ViewMaterials() {
     );
 
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container  '>
       <TchNav />
       <div className=' mt-6 md:mt-8'>
         {materials && materials.map((material) => (

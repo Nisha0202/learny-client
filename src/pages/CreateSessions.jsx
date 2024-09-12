@@ -25,7 +25,7 @@ const CreateSessions = () => {
 
   if (!usern) {
     return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
+      <div className="container   flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to create a session.</p>
       </div>
     );
@@ -136,7 +136,7 @@ const CreateSessions = () => {
   };
 
   return (
-    <div className="container min-h-[75vh]">
+    <div className="container  ">
       <TchNav />
       <div className='max-w-md mx-auto my-4'>
         <form onSubmit={handleSubmit} className="form-control w-full">

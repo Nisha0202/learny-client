@@ -93,7 +93,7 @@ const fetchSessions = async () => {
   
   if (loading)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>Loading...</div>
       </div>
     );
@@ -102,21 +102,21 @@ const fetchSessions = async () => {
 
   if (status === 'loading')
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>Loading...</div>
       </div>
     );
 
   if (status === 'error')
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>An error has occurred</div>
       </div>
     );
 
   if (!sessionsData || sessionsData.length === 0)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>No materials</div>
       
       </div>

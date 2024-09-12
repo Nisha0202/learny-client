@@ -22,7 +22,7 @@ const ViewAllMaterials = () => {
   // Check if the user is an admin
   if (decodedToken !== 'admin') {
       return (
-          <div className="container min-h-[75vh] flex justify-center items-center">
+          <div className="container   flex justify-center items-center">
               <p className="text-red-500 font-bold">Access Denied: Admins only.</p>
           </div>
       );

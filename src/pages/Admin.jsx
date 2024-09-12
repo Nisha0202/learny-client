@@ -4,7 +4,7 @@ import AdmNav from '../components/AdmNav'
 
 export default function Student() {
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container'>
 
       <AdmNav/>
       <div className='container text-center'>

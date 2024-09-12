@@ -48,14 +48,14 @@ const CreateNotes = () => {
   // If usern is not available, show a message instead of the form
   if (!usern) {
     return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
+      <div className="container   flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to create a note.</p>
       </div>
     );
   }
 
   return (
-    <div className="container min-h-[75vh]">
+    <div className="container  ">
       <StdNav />
       <div className="max-w-md mx-auto my-12">
         <form onSubmit={handleSubmit} className="form-control w-full">

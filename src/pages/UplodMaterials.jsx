@@ -22,7 +22,7 @@ export default function UploadMaterials() {
 
     if (!usern) {
         return (
-          <div className="container min-h-[75vh] flex justify-center items-center">
+          <div className="container   flex justify-center items-center">
             <p className="text-red-500 font-bold">You must be logged in to access.</p>
           </div>
         );
@@ -97,7 +97,7 @@ export default function UploadMaterials() {
 
     if (status === 'loading')
         return (
-            <div className='container min-h-[75vh]'>
+            <div className='container  '>
                 <TchNav />
                 <div className='font-bold grid place-content-center mt-4'>
                     Loading...
@@ -107,7 +107,7 @@ export default function UploadMaterials() {
 
     if (status === 'error')
         return (
-            <div className='container min-h-[75vh]'>
+            <div className='container  '>
                 <TchNav />
                 <div className='font-bold grid place-content-center mt-4'>
                     An error has occurred
@@ -117,7 +117,7 @@ export default function UploadMaterials() {
 
     if (!sessionsData || sessionsData.length === 0)
         return (
-            <div className='container min-h-[75vh]'>
+            <div className='container  '>
                 <TchNav />
                 <div className='font-bold grid place-content-center mt-4'>
                     No Session Created Yet
@@ -128,7 +128,7 @@ export default function UploadMaterials() {
     const approvedSessions = sessionsData ? sessionsData.filter(session => session.status === 'approved') : [];
 
     return (
-        <div className='container min-h-[75vh]'>
+        <div className='container  '>
             <TchNav />
             <div className='flex flex-wrap gap-6 justify-around mt-6 md:mt-8'>
                 {Array.isArray(approvedSessions) && approvedSessions.length > 0 ? (

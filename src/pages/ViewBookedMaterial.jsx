@@ -32,7 +32,7 @@ const ViewBookedMaterial = () => {
 
   if (!usern) {
     return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
+      <div className="container   flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to access.</p>
       </div>
     );
@@ -40,7 +40,7 @@ const ViewBookedMaterial = () => {
 
   if (isLoading) {
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           Loading...
@@ -51,7 +51,7 @@ const ViewBookedMaterial = () => {
 
   if (error) {
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           An error has occurred
@@ -62,7 +62,7 @@ const ViewBookedMaterial = () => {
 
   if (!sessions || sessions.length === 0) {
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
           No Materials
@@ -75,7 +75,7 @@ const ViewBookedMaterial = () => {
 
 
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container  '>
       <StdNav/>
       <div className='flex flex-col max-w-xl lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8 '>
            {sessions.map(session => {

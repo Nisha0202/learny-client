@@ -3,7 +3,7 @@ import StdNav from '../components/StdNav'
 
 export default function Student() {
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container'>
 
       <StdNav/>
       <div className='container text-center'>

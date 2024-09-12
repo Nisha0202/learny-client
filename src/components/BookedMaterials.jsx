@@ -41,28 +41,28 @@ export default function BookedMaterials() {
 
   if (isLoading)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>Loading...</div>
       </div>
     );
 
   if (error)
     return (
-      <div className='container min-h-[75vh]'>
+      <div className='container  '>
         <div className='font-bold grid place-content-center mt-4'>An error has occurred</div>
       </div>
     );
 
   if (!materials || materials.length === 0)
     return (
-      <div className='container min-h-[75vh] flex flex-col items-center justify-center gap-2'>
+      <div className='container   flex flex-col items-center justify-center gap-2'>
         <div className='font-bold grid place-content-center'>No materials</div>
         <Link to={"/booked-session-material"} className='text-blue-400 text-center font-normal'>Back</Link>
       </div>
     );
 
   return (
-    <div className='container min-h-[75vh]'>
+    <div className='container  '>
       <div className=' mt-6 md:mt-8'>
         <h1 className='font-semibold text-center'>Booked Materials</h1>
 
