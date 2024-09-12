@@ -15,13 +15,7 @@ function ManageNotes() {
   const queryClient = useQueryClient();
 
 
-  if (!usern) {
-    return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
-        <p className="text-red-500 font-bold">You must be logged in to access.</p>
-      </div>
-    );
-  }
+
 
   const fetchNotes = async () => {
     const userEmail = usern.email;
@@ -101,6 +95,14 @@ function ManageNotes() {
     setDescription(note.description);
   };
 
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );
+  }
+
   if (isLoading)
     return (
       <div className='container min-h-[75vh]'>
@@ -138,7 +140,7 @@ function ManageNotes() {
     <div className='container min-h-[75vh]'>
       <StdNav />
       {notes && notes.map(note => (
-        <div key={note._id} className='w-full h-32 flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
+        <div key={note._id} className='h-44 items-center  flex max-w-md flex-wrap gap-8 border-2 w-full p-4 mt-2'>
           <div>
             <h2 className='font-bold text-wrap text-lg'>{note.title}</h2>
             <p className='text-sm mt-4'>{note.description}</p>

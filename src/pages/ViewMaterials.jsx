@@ -12,13 +12,6 @@ function ViewMaterials() {
   const dialogRef = useRef(null);
   const queryClient = useQueryClient();
 
-  if (!usern) {
-    return (
-      <div className="container min-h-[75vh] flex justify-center items-center">
-        <p className="text-red-500 font-bold">You must be logged in to access.</p>
-      </div>
-    );
-  }
 
   const fetchMaterials = async () => {
     const tutorEmail = usern.email;
@@ -58,6 +51,14 @@ function ViewMaterials() {
       Swal.fire('Deleted!', 'Your material has been deleted.', 'success');
     },
   });
+
+  if (!usern) {
+    return (
+      <div className="container min-h-[75vh] flex justify-center items-center">
+        <p className="text-red-500 font-bold">You must be logged in to access.</p>
+      </div>
+    );
+  }
 
   const updateMaterial = useMutation({
     mutationFn: async ({ id, updatedMaterial }) => {
@@ -148,7 +149,7 @@ function ViewMaterials() {
       <TchNav />
       <div className=' mt-6 md:mt-8'>
         {materials && materials.map((material) => (
-          <div key={material._id} className='w-full  flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
+          <div key={material._id} className='w-full max-w-xl flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>
             <div className='flex flex-col gap-3 min-w-44'>
               <h2 className='font-bold text-wrap text-lg'>{material.title}</h2>
               {material.link && <a href={material.link} className='text-blue-500' target="_blank" rel="noopener noreferrer">View Google Drive Link</a>}

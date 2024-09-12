@@ -17,12 +17,13 @@ export default function SignUp() {
   const [formerror, setFormerror] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
-
+  const [previewImage, setPreviewImage] = useState(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setPreviewImage(URL.createObjectURL(file)); // Set the image preview
       const formData = new FormData();
       formData.append('image', file);
 
@@ -78,9 +79,11 @@ export default function SignUp() {
         showConfirmButton: false,
         timer: 2000
       }).then(() => {
+        setLoading(false);
         navigate('/login');
+
       });
-      setLoading(false);
+      
 
     } catch (error) {
       console.error('Error:', error);
@@ -93,6 +96,7 @@ export default function SignUp() {
   };
 
   const onSubmit = async (data) => {
+    setFormerror("");
     setLoading(true);
     const { email, pass, username, role } = data;
 
@@ -111,10 +115,10 @@ export default function SignUp() {
         postUserInfo({ email, pass, username, image: imageUrl, role });
         reset();
         setFormerror('');
-        setLoading(false);
+        // setLoading(false);
 
       })
-    
+
       .catch(error => {
         console.error('Error creating user:', error.message);
         const errorCode = error.code;
@@ -139,10 +143,28 @@ export default function SignUp() {
             {...register("username", { required: true })} />
           {errors.username && <span className='text-xs text-red-500'>required field</span>}
         </label>
-      
+
+        {/* <label htmlFor="file-upload" className="custom-file-upload w-full rounded-lg">
+          <div className='flex gap-4 items-center w-full py-1.5'>
+            <div className='w-6 h-6 border-2 grid items-center show-image'><MdOutlinePhotoLibrary /></div>
+            
+            {imageUploaded ? (
+              <p>Uploaded</p>
+            ) : (
+              <p>Profile Picture</p>
+            )}
+          </div>
+        </label> */}
+
         <label htmlFor="file-upload" className="custom-file-upload w-full rounded-lg">
           <div className='flex gap-4 items-center w-full py-1.5'>
-            <MdOutlinePhotoLibrary />
+            <div className='w-16 h-16 border-2 grid items-center justify-center show-image'>
+              {previewImage ? (
+                <img src={previewImage} alt="Preview" className="w-full h-full object-cover" />
+              ) : (
+                <MdOutlinePhotoLibrary />
+              )}
+            </div>
             {imageUploaded ? (
               <p>Uploaded</p>
             ) : (
@@ -150,6 +172,7 @@ export default function SignUp() {
             )}
           </div>
         </label>
+
         <input id="file-upload" type="file" className="input " name='image'
           {...register("image")} onChange={handleImageChange} />
 

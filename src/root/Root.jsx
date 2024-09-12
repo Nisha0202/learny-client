@@ -7,12 +7,13 @@ export default function Root() {
     return (
         <>
             <div id="detail" className="plus">
-                <div className="">
-                     <Navbar></Navbar>
+                <div className="grid min-h-[100vh] grid-rows-[auto_1fr_auto]">
+                     <Navbar/>
                 <Outlet />
+                 <Footer/>
                 </div>
                
-                <Footer></Footer>
+               
 
             </div>
         </>

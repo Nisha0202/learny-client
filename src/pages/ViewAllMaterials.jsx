@@ -75,22 +75,22 @@ const ViewAllMaterials = () => {
     <div className='container mx-auto p-4'>
       <AdmNav/>
       <div className='font-bold grid place-content-center mt-4 text-lg'>All Materials</div>
-      <div className='flex flex-col mt-4 gap-2'>
+      <div className='flex flex-wrap mt-4 gap-4'>
         {materials.length > 0 ? (
           materials.map((material) => (
-            <div key={material._id} className='p-4 border-2 mt-2 rounded shadow'>
+            <div key={material._id} className='p-4 border-2 mt-2 md:w-80 w-full rounded shadow relative'>
 
-              <p className='text-gray-700 text-base mb-4'>{material.title}</p>
+              <p className='text-gray-700 text-base mb-4 text-wrap'>{material.title}</p>
               {material.link && <a href={material.link} className='text-blue-500 mb-2' target="_blank"
                 rel="noopener noreferrer">View Google Drive Link</a>}
 
               {material.image && (
                 <div>
-                  <img src={material.image} className='w-24 h-24 object-contain border-2 mt-2' alt='Material' />
+                  <img src={material.image} className='w-24 h-24 object-contain border-2 mt-2 mb-14' alt='Material' />
                 </div>
               )}
            
-              <button className='btn btn-sm text-red-500 mt-4' onClick={() => handleDelete(material._id)}>Remove</button>
+              <button className='btn btn-sm text-red-500 mt-4 bottom-4 absolute' onClick={() => handleDelete(material._id)}>Remove</button>
             </div>
           ))
         ) : (

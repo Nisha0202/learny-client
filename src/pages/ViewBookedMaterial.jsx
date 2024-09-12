@@ -1,8 +1,7 @@
-
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../FirebaseProbider/FirbaseProvider';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import StdNav from '../components/StdNav';
 
@@ -15,7 +14,22 @@ const fetchSessions = async ({ queryKey }) => {
 const ViewBookedMaterial = () => {
   const navigate = useNavigate();
   const { usern } = useContext(AuthContext);
-  
+
+  // Ensure usern exists before running the query
+  const { data: sessions, isLoading, error } = useQuery({
+    queryKey: [usern?.email], // Optional chaining to avoid accessing email if usern is null
+    queryFn: fetchSessions,
+    enabled: !!usern, // Run the query only if usern exists
+  });
+
+  const viewMaterials = (sessionId) => {
+    if (!usern) {
+      navigate('/login');
+    } else {
+      navigate(`/viewmaterials/${sessionId}`);
+    }
+  };
+
   if (!usern) {
     return (
       <div className="container min-h-[75vh] flex justify-center items-center">
@@ -24,56 +38,46 @@ const ViewBookedMaterial = () => {
     );
   }
 
-  const { data: sessions, isLoading, error } = useQuery({
-    queryKey: [usern.email],
-    queryFn: fetchSessions,
-  });
-
-
-  const viewMaterials = (sessionId) => {
-    // console.log(sessionId);
-    if (!usern) {
-      navigate('/login');
-    } else {
-      navigate(`/viewmaterials/${sessionId}`);
-    }
-  };
-  
-
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className='container min-h-[75vh]'>
-        <StdNav/>
+        <StdNav />
         <div className='font-bold grid place-content-center mt-4'>
-        Loading...
+          Loading...
         </div>
       </div>
     );
-  if (error)
-      return (
-        <div className='container min-h-[75vh]'>
-          <StdNav/>
-          <div className='font-bold grid place-content-center mt-4'>
+  }
+
+  if (error) {
+    return (
+      <div className='container min-h-[75vh]'>
+        <StdNav />
+        <div className='font-bold grid place-content-center mt-4'>
           An error has occurred
-          </div>
-        </div>
-      );
-  if (!sessions || sessions.length === 0)
-    return (
-      <div className='container min-h-[75vh]'>
-        <StdNav/>
-        <div className='font-bold grid place-content-center mt-4'>
-              No Materials
         </div>
       </div>
     );
-  
+  }
+
+  if (!sessions || sessions.length === 0) {
+    return (
+      <div className='container min-h-[75vh]'>
+        <StdNav />
+        <div className='font-bold grid place-content-center mt-4'>
+          No Materials
+        </div>
+      </div>
+    );
+  }
+
+
 
 
   return (
     <div className='container min-h-[75vh]'>
       <StdNav/>
-      <div className='flex flex-col lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8'>
+      <div className='flex flex-col max-w-xl lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8 '>
            {sessions.map(session => {
         const desc = session.sessionDetails.sessionDescription.split(' ').slice(0, 13).join(' ');
   
