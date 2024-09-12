@@ -1,4 +1,4 @@
-# website- https://learny-creative-hummingbird-4bce38.netlify.app/
+# website- https://learnystudy.netlify.app
 # github-server-side- https://github.com/Nisha0202/learny-server
 
 ## Project Overview
