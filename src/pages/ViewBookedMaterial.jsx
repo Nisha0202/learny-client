@@ -32,7 +32,7 @@ const ViewBookedMaterial = () => {
 
   if (!usern) {
     return (
-      <div className="container   flex justify-center items-center">
+      <div className="container flex justify-center items-center">
         <p className="text-red-500 font-bold">You must be logged in to access.</p>
       </div>
     );
@@ -77,7 +77,7 @@ const ViewBookedMaterial = () => {
   return (
     <div className='container  '>
       <StdNav/>
-      <div className='flex flex-col max-w-xl lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8 '>
+      <div className='flex flex-col  lg:flex-wrap lg:flex-row items-center justify-around gap-6 mt-6 md:mt-8 '>
            {sessions.map(session => {
         const desc = session.sessionDetails.sessionDescription.split(' ').slice(0, 13).join(' ');
   

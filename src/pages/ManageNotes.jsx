@@ -137,10 +137,12 @@ function ManageNotes() {
 
 
   return (
-    <div className='container  '>
+    <div className='container'>
       <StdNav />
-      {notes && notes.map(note => (
-        <div key={note._id} className='h-44 items-center  flex max-w-md flex-wrap gap-8 border-2 w-full p-4 mt-2'>
+      <div className='font-bold grid place-content-center mt-4 text-lg'>Your Notes</div>
+      <div className='mt-6'>
+           {notes && notes.map(note => (
+        <div key={note._id} className='h-44 items-center  flex max-w-md flex-wrap gap-8 border-2 w-full p-4 '>
           <div>
             <h2 className='font-bold text-wrap text-lg'>{note.title}</h2>
             <p className='text-sm mt-4'>{note.description}</p>
@@ -185,7 +187,9 @@ function ManageNotes() {
         <div className="absolute inset-0 flex justify-center my-2 items-center">
           <div className="loading loading-ring loading-xl text-indigo-500"></div>
         </div>
-      )}
+      )}   
+      </div>
+
     </div>
   );
 }

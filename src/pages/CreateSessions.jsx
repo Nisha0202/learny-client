@@ -138,6 +138,7 @@ const CreateSessions = () => {
   return (
     <div className="container  ">
       <TchNav />
+      <div className='font-bold grid place-content-center mt-4 text-lg'>Create Sessions</div>
       <div className='max-w-md mx-auto my-4'>
         <form onSubmit={handleSubmit} className="form-control w-full">
           {renderInputs()}

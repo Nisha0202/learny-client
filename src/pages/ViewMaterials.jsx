@@ -147,6 +147,7 @@ function ViewMaterials() {
   return (
     <div className='container  '>
       <TchNav />
+      <div className='font-bold grid place-content-center mt-4 text-lg'>Your Materials</div>
       <div className=' mt-6 md:mt-8'>
         {materials && materials.map((material) => (
           <div key={material._id} className='w-full max-w-xl flex flex-col md:flex-row gap-8 border-2 p-4 mt-2'>

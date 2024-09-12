@@ -57,6 +57,7 @@ const CreateNotes = () => {
   return (
     <div className="container  ">
       <StdNav />
+      <div className='font-bold grid place-content-center mt-4 text-lg'>Create Notes</div>
       <div className="max-w-md mx-auto my-12">
         <form onSubmit={handleSubmit} className="form-control w-full">
           <label className="label">
