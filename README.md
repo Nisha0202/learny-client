@@ -15,7 +15,7 @@
 - **Backend:** Node.js, Express.js, MongoDB Atlas, Firebase Authentication.
 - **Other:** JWT Decode, File Saver, @tanstack/react-query, JWT Token, Bcyrpt, For online payment Stripe, ImgBB to save uploaded image on cloud.
 
-## Admin Control
+## Accounts
 - **Email:** admin@gmail.com
 - **Password:** Adminn
 - **Email:** student@gmail.com
